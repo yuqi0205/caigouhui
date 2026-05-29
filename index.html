@@ -1,0 +1,2145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>采购部 2026 H1 述职会+务虚会</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#1a56db;--primary-dark:#1e40af;--primary-light:#dbeafe;
+  --purple:#7c3aed;--purple-light:#ede9fe;
+  --green:#059669;--green-light:#d1fae5;
+  --orange:#d97706;--orange-light:#fef3c7;
+  --cyan:#0891b2;--cyan-light:#cffafe;
+  --g50:#f8fafc;--g100:#f1f5f9;--g200:#e2e8f0;--g300:#cbd5e1;
+  --g400:#94a3b8;--g500:#64748b;--g600:#475569;--g700:#334155;
+  --g800:#1e293b;--g900:#0f172a;
+  --sh0:0 1px 3px rgba(0,0,0,.08);--sh1:0 4px 16px rgba(0,0,0,.10);
+  --sh2:0 8px 32px rgba(0,0,0,.16);
+  --r:12px;--rl:16px;
+}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+     background:var(--g50);color:var(--g800);min-height:100vh}
+
+/* ── 页面切换 ── */
+.page{display:none!important}
+.page.active{display:block!important}
+#pg-landing.active{display:flex!important}
+
+/* ════════════════════════════════
+   入口页
+════════════════════════════════ */
+#pg-landing{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#e8f5e9 0%,#f0fdf4 30%,#ecfdf5 55%,#d1fae5 80%,#bbf7d0 100%);
+  position:relative;overflow:hidden;
+  padding:40px 0 48px
+}
+#pg-landing::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 20%,rgba(52,211,153,.18) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 75%,rgba(16,185,129,.14) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 40% at 60% 10%,rgba(251,191,36,.10) 0%,transparent 50%)
+}
+#pg-landing::after{display:none}
+.land-wrap{
+  position:relative;z-index:1;
+  text-align:center;
+  padding:0 24px 28px;
+  max-width:960px;
+  width:100%;
+  margin:0 auto;
+  box-sizing:border-box
+}
+.land-pill{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.7);
+  color:#065f46;font-size:11px;font-weight:700;letter-spacing:.12em;
+  padding:5px 16px;border-radius:99px;margin-bottom:16px;
+  backdrop-filter:blur(6px)
+}
+.land-h1{
+  font-size:clamp(30px,5vw,46px);font-weight:900;color:#065f46;
+  line-height:1.1;margin-bottom:10px;letter-spacing:-.025em;
+  white-space:nowrap;
+  text-shadow:0 2px 12px rgba(255,255,255,.6)
+}
+.land-sub{
+  font-size:13px;color:rgba(4,80,60,.75);
+  margin-bottom:16px;letter-spacing:.01em
+}
+/* 会议宗旨标签行 */
+.land-purpose{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:6px 8px;
+  margin-bottom:18px
+}
+.land-purpose-tag{
+  font-size:11px;font-weight:600;color:rgba(2,78,50,.9);
+  background:rgba(255,255,255,.55);
+  border:1px solid rgba(255,255,255,.7);
+  padding:4px 11px;border-radius:99px;
+  backdrop-filter:blur(6px)
+}
+.land-divider{
+  width:40px;height:1.5px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+  margin:0 auto 16px
+}
+.land-metas{
+  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+  margin-bottom:22px
+}
+.land-meta{
+  font-size:13px;color:rgba(4,78,50,.8);
+  display:flex;align-items:center;gap:6px
+}
+.land-meta-dot{
+  width:3px;height:3px;border-radius:50%;
+  background:rgba(255,255,255,.22)
+}
+.land-hint{
+  font-size:11px;color:rgba(4,78,50,.55);
+  margin-bottom:16px;letter-spacing:.08em;text-transform:uppercase
+}
+.role-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:28px
+}
+.role-btn{
+  background:rgba(255,255,255,.75);
+  border:1.5px solid rgba(255,255,255,.9);
+  border-radius:18px;padding:24px 20px;
+  cursor:pointer;transition:all .28s cubic-bezier(.4,0,.2,1);
+  text-align:center;backdrop-filter:blur(12px)
+}
+.role-btn:hover{
+  background:rgba(255,255,255,.92);
+  border-color:rgba(255,255,255,1);
+  transform:translateY(-5px);
+  box-shadow:0 18px 44px rgba(0,0,0,.15)
+}
+.role-btn:active{transform:translateY(-1px)}
+.role-em{font-size:44px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;height:68px}
+.role-name{font-size:17px;font-weight:800;color:#065f46;margin-bottom:7px}
+.role-desc{font-size:12px;color:rgba(4,78,50,.65);line-height:1.65;margin-bottom:14px}
+.role-chip{
+  display:inline-block;font-size:11px;font-weight:700;
+  padding:3px 13px;border-radius:99px
+}
+.role-chip-m{background:rgba(251,191,36,.2);color:#fbbf24}
+.role-chip-s{background:rgba(52,211,153,.2);color:#34d399}
+/* 首页全员快捷区 */
+.land-public{
+  position:relative;z-index:1;
+  width:100%;max-width:960px;
+  padding:0 24px 4px;
+  box-sizing:border-box;
+  margin:0 auto
+}
+.land-public-label{
+  font-size:11px;font-weight:700;color:rgba(4,78,50,.5);
+  letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:10px;text-align:center
+}
+.land-pub-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px
+}
+.land-pub-btn{
+  display:flex;align-items:center;gap:12px;
+  background:rgba(255,255,255,.72);
+  border:1.5px solid rgba(255,255,255,.9);
+  border-radius:14px;padding:14px 16px;
+  cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);
+  text-align:left;backdrop-filter:blur(10px)
+}
+.land-pub-btn:hover{
+  background:rgba(255,255,255,.92);
+  border-color:rgba(255,255,255,1);
+  transform:translateY(-3px);
+  box-shadow:0 12px 32px rgba(0,0,0,.12)
+}
+.land-pub-btn:active{transform:translateY(-1px)}
+.land-pub-em{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:19px;flex-shrink:0
+}
+.land-pub-em-people{background:rgba(79,70,229,.35)}
+.land-pub-em-notice{background:rgba(8,145,178,.35)}
+.land-pub-body{flex:1}
+.land-pub-title{font-size:13px;font-weight:800;color:#065f46;margin-bottom:2px}
+.land-pub-desc{font-size:11px;color:rgba(4,78,50,.65);line-height:1.5}
+.land-pub-arrow{font-size:13px;color:rgba(4,78,50,.5);flex-shrink:0}
+
+.land-foot{
+  position:relative;z-index:1;
+  margin-top:20px;
+  font-size:11px;color:rgba(4,78,50,.4);
+  text-align:center
+}
+
+/* ════════════════════════════════
+   公共顶栏
+════════════════════════════════ */
+.topbar{
+  position:sticky;top:0;z-index:200;
+  background:#fff;border-bottom:1px solid var(--g200);box-shadow:var(--sh0)
+}
+.topbar-in{
+  max-width:1100px;margin:0 auto;padding:0 24px;height:58px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px
+}
+.tb-left{display:flex;align-items:center;gap:10px}
+.tb-logo{
+  width:34px;height:34px;background:var(--primary);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0
+}
+.tb-title{font-size:15px;font-weight:700;color:var(--g900);white-space:nowrap}
+.tb-chip{font-size:11px;font-weight:700;padding:2px 10px;border-radius:99px}
+.tb-chip-m{background:#fef3c7;color:#92400e}
+.tb-chip-s{background:var(--green-light);color:#065f46}
+.tb-right{display:flex;align-items:center;gap:8px}
+.btn-back{
+  display:flex;align-items:center;gap:5px;
+  font-size:13px;color:var(--g500);background:none;
+  border:1px solid var(--g200);padding:6px 14px;border-radius:8px;cursor:pointer;transition:all .2s
+}
+.btn-back:hover{color:var(--primary);border-color:var(--primary);background:var(--primary-light)}
+.btn-home{
+  font-size:13px;color:var(--primary);background:var(--primary-light);
+  border:none;padding:6px 14px;border-radius:8px;cursor:pointer;
+  font-weight:600;transition:all .2s
+}
+.btn-home:hover{background:var(--primary);color:#fff}
+
+/* ════════════════════════════════
+   角色主页 —— 模块 Banner 卡片列表
+════════════════════════════════ */
+.home-wrap{max-width:760px;margin:0 auto;padding:40px 24px 80px}
+.home-greeting{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:36px;padding:20px 24px;
+  background:#fff;border:1px solid var(--g200);border-radius:var(--rl);box-shadow:var(--sh0)
+}
+.home-greeting-icon{font-size:36px;flex-shrink:0}
+.home-greeting-title{font-size:18px;font-weight:800;color:var(--g900);margin-bottom:4px}
+.home-greeting-sub{font-size:13px;color:var(--g500)}
+.module-list{display:flex;flex-direction:column;gap:18px}
+
+/* 模块 Banner 卡片 */
+.mod-banner{
+  border-radius:var(--rl);overflow:hidden;cursor:pointer;
+  box-shadow:var(--sh1);transition:transform .22s,box-shadow .22s;
+  text-decoration:none;display:block;border:none;background:none;width:100%;text-align:left
+}
+.mod-banner:hover{transform:translateY(-4px);box-shadow:var(--sh2)}
+.mod-banner:active{transform:translateY(-1px)}
+.mod-banner-inner{
+  display:flex;align-items:stretch;min-height:110px;
+}
+/* 左侧彩色图标区 */
+.mod-icon-col{
+  width:120px;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;padding:20px 10px
+}
+.mod-icon-col .em{font-size:44px}
+.mod-icon-col .mod-label{font-size:11px;font-weight:700;letter-spacing:.06em;opacity:.75;text-align:center}
+/* 右侧内容区 */
+.mod-body{
+  flex:1;background:#fff;padding:22px 24px;
+  display:flex;flex-direction:column;justify-content:center;gap:6px;
+  border-left:none
+}
+.mod-title{font-size:18px;font-weight:800;color:var(--g900)}
+.mod-desc{font-size:13px;color:var(--g500);line-height:1.6}
+.mod-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.mod-arrow{
+  align-self:center;flex-shrink:0;
+  width:32px;height:32px;background:var(--g100);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:var(--g500);margin-right:20px;
+  transition:background .2s,color .2s
+}
+.mod-banner:hover .mod-arrow{background:var(--primary);color:#fff}
+
+/* 配色方案 */
+.mod-c-blue .mod-icon-col{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff}
+.mod-c-purple .mod-icon-col{background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff}
+.mod-c-green .mod-icon-col{background:linear-gradient(135deg,#059669,#047857);color:#fff}
+.mod-c-orange .mod-icon-col{background:linear-gradient(135deg,#d97706,#b45309);color:#fff}
+.mod-c-indigo .mod-icon-col{background:linear-gradient(135deg,#4f46e5,#3730a3);color:#fff}
+.mod-c-teal .mod-icon-col{background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff}
+.tag.t-indigo{background:#e0e7ff;color:#3730a3}
+.tag.t-teal{background:#cffafe;color:#0e7490}
+
+/* ════════════════════════════════
+   内容页通用容器
+════════════════════════════════ */
+.content-wrap{max-width:1100px;margin:0 auto;padding:32px 24px 80px}
+
+/* ─ 内容页顶部 hero banner ─ */
+.hero{
+  border-radius:var(--rl);padding:32px 36px;color:#fff;
+  margin-bottom:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap
+}
+.hero-icon{font-size:52px;flex-shrink:0}
+.hero-body{flex:1;min-width:180px}
+.hero-title{font-size:21px;font-weight:900;margin-bottom:8px;line-height:1.2}
+.hero-metas{display:flex;flex-wrap:wrap;gap:14px}
+.hero-meta{font-size:13px;opacity:.82;display:flex;align-items:center;gap:5px}
+
+/* ─ 统计数字行 ─ */
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px;margin-bottom:28px}
+.stat{background:#fff;border:1px solid var(--g200);border-radius:var(--r);
+      padding:18px;text-align:center;box-shadow:var(--sh0)}
+.stat-n{font-size:28px;font-weight:900;color:var(--primary);line-height:1;margin-bottom:5px}
+.stat-l{font-size:12px;color:var(--g500)}
+
+/* ─ 卡片 ─ */
+.card{background:#fff;border:1px solid var(--g200);border-radius:var(--rl);
+      padding:24px;margin-bottom:20px;box-shadow:var(--sh0)}
+.card-h{font-size:15px;font-weight:700;color:var(--g900);margin-bottom:14px;
+        display:flex;align-items:center;gap:8px}
+.divider{height:1px;background:var(--g100);margin:18px 0}
+
+/* ─ Day 折叠卡 ─ */
+.day-card{background:#fff;border:1px solid var(--g200);border-radius:var(--rl);
+          margin-bottom:20px;overflow:hidden;box-shadow:var(--sh0)}
+.day-hd{display:flex;align-items:center;gap:14px;padding:16px 22px;
+        cursor:pointer;user-select:none;transition:background .15s}
+.day-hd:hover{background:var(--g50)}
+.day-num{width:46px;height:46px;border-radius:11px;display:flex;flex-direction:column;
+         align-items:center;justify-content:center;font-weight:900;flex-shrink:0}
+.day-num .d{font-size:9px;text-transform:uppercase;letter-spacing:.07em;opacity:.65}
+.day-num .n{font-size:21px;line-height:1}
+.day-card[data-d="1"] .day-num{background:#dbeafe;color:#1d4ed8}
+.day-card[data-d="2"] .day-num{background:#ede9fe;color:#6d28d9}
+.day-card[data-d="3"] .day-num{background:#d1fae5;color:#065f46}
+.day-card[data-d="4"] .day-num{background:#fef3c7;color:#92400e}
+.day-tw{flex:1}
+.day-title{font-size:15px;font-weight:700;color:var(--g900)}
+.day-date{font-size:12px;color:var(--g500);margin-top:2px}
+.day-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.chevron{font-size:18px;color:var(--g400);transition:transform .2s;flex-shrink:0}
+.day-card.open .chevron{transform:rotate(180deg)}
+.day-bd{display:none;border-top:1px solid var(--g200)}
+.day-card.open .day-bd{display:block}
+
+/* ─ 标签 ─ */
+.tag{font-size:11px;font-weight:600;padding:2px 9px;border-radius:99px}
+.t-blue{background:var(--primary-light);color:var(--primary-dark)}
+.t-purple{background:var(--purple-light);color:var(--purple)}
+.t-green{background:var(--green-light);color:var(--green)}
+.t-orange{background:var(--orange-light);color:var(--orange)}
+.t-cyan{background:var(--cyan-light);color:var(--cyan)}
+.t-gray{background:var(--g100);color:var(--g600)}
+
+/* ─ 时间线 ─ */
+.tl{padding:18px 22px}
+.tl-item{display:flex;gap:14px;padding:12px 0;position:relative}
+.tl-item:not(:last-child)::after{
+  content:'';position:absolute;left:104px;top:42px;bottom:0;width:2px;background:var(--g200)}
+.tl-time{flex-shrink:0;width:86px;font-size:11px;font-weight:600;color:var(--g500);
+         padding-top:2px;text-align:right}
+.tl-dot{flex-shrink:0;width:10px;height:10px;border-radius:50%;margin-top:4px;position:relative;z-index:1}
+.d-blue{background:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+.d-purple{background:var(--purple);box-shadow:0 0 0 3px var(--purple-light)}
+.d-green{background:var(--green);box-shadow:0 0 0 3px var(--green-light)}
+.d-orange{background:var(--orange);box-shadow:0 0 0 3px var(--orange-light)}
+.d-gray{background:var(--g400);box-shadow:0 0 0 3px var(--g100)}
+.tl-body{flex:1}
+.tl-title{font-size:13px;font-weight:700;color:var(--g800);margin-bottom:3px}
+.tl-note{font-size:12px;color:var(--g500);line-height:1.65}
+.who{display:inline-block;font-size:10px;font-weight:700;margin-top:5px;padding:2px 8px;border-radius:6px}
+.who-m{background:#fef3c7;color:#92400e}
+.who-a{background:var(--green-light);color:#065f46}
+
+/* ─ 人员网格 ─ */
+.people-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(188px,1fr));gap:10px;margin-bottom:16px}
+.person{background:#fff;border:1px solid var(--g200);border-radius:var(--r);
+        padding:13px;display:flex;align-items:center;gap:10px;box-shadow:var(--sh0)}
+.p-av{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;
+      justify-content:center;font-size:17px;flex-shrink:0}
+.av-m{background:#fef3c7}.av-s{background:var(--primary-light)}
+.p-name{font-size:13px;font-weight:700;color:var(--g800)}
+.p-role{font-size:11px;color:var(--g500);margin-top:2px}
+
+/* ─ 会前准备卡 ─ */
+.prep-card{background:#fff;border:1px solid var(--g200);border-radius:var(--rl);
+           overflow:hidden;box-shadow:var(--sh0);margin-bottom:14px}
+.prep-hd{padding:16px 18px;display:flex;align-items:flex-start;gap:12px;
+         cursor:pointer;transition:background .15s}
+.prep-hd:hover{background:var(--g50)}
+.prep-ico{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;
+          justify-content:center;font-size:20px;flex-shrink:0}
+.ico-blue{background:var(--primary-light)}.ico-purple{background:var(--purple-light)}
+.ico-green{background:var(--green-light)}.ico-orange{background:var(--orange-light)}
+.prep-tw{flex:1}
+.prep-title{font-size:14px;font-weight:700;color:var(--g900)}
+.prep-sub{font-size:12px;color:var(--g500);margin-top:3px}
+.prep-chev{font-size:16px;color:var(--g400);transition:transform .2s;margin-top:2px;flex-shrink:0}
+.prep-card.open .prep-chev{transform:rotate(180deg)}
+.prep-bd{display:none;border-top:1px solid var(--g100);padding:18px}
+.prep-card.open .prep-bd{display:block}
+
+/* ─ 筹备时间线 ─ */
+.ptl{padding:4px 0}
+.ptl-item{display:flex;gap:12px;padding:10px 0;position:relative}
+.ptl-item:not(:last-child)::after{
+  content:'';position:absolute;left:9px;top:28px;bottom:0;width:2px;background:var(--g200)}
+.ptl-dot{width:10px;height:10px;border-radius:50%;margin-top:4px;flex-shrink:0;
+         position:relative;z-index:1}
+.ptl-done{background:var(--green);box-shadow:0 0 0 3px var(--green-light)}
+.ptl-todo{background:var(--g300);box-shadow:0 0 0 3px var(--g100)}
+.ptl-hot{background:var(--orange);box-shadow:0 0 0 3px var(--orange-light)}
+.ptl-date{font-size:12px;font-weight:600;color:var(--g500);width:88px;flex-shrink:0}
+.ptl-task{font-size:13px;color:var(--g700);flex:1;line-height:1.5}
+
+/* ─ 分组讨论网格 ─ */
+.table-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-bottom:20px}
+.table-card{background:#fff;border-radius:var(--rl);border:1px solid var(--g200);
+            padding:18px;box-shadow:var(--sh0)}
+.tc-title{font-size:14px;font-weight:700;color:var(--g900);margin-bottom:10px;
+          display:flex;align-items:center;gap:7px}
+.tc-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px}
+.tc-mem{margin-bottom:10px}
+.tc-mem-item{display:flex;align-items:center;gap:6px;padding:5px 0;
+             border-bottom:1px solid var(--g100);font-size:12px;color:var(--g700)}
+.tc-mem-item:last-child{border-bottom:none}
+.star{color:var(--orange);font-size:13px}
+.tc-focus{background:var(--g50);border-radius:7px;padding:9px 11px;
+          font-size:11px;color:var(--g600);line-height:1.6}
+.tc-focus-label{font-weight:700;color:var(--g700);margin-bottom:3px}
+
+/* ─ 团建方案卡 ─ */
+.tb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+.tb-card{background:#fff;border:1px solid var(--g200);border-radius:var(--rl);
+         overflow:hidden;box-shadow:var(--sh0);transition:transform .2s,box-shadow .2s}
+.tb-card:hover{transform:translateY(-3px);box-shadow:var(--sh1)}
+.tb-head{height:110px;display:flex;align-items:center;justify-content:center;
+         font-size:48px;position:relative}
+.tb-card[data-p="A"] .tb-head{background:linear-gradient(135deg,#dbeafe,#c7d2fe)}
+.tb-card[data-p="B"] .tb-head{background:linear-gradient(135deg,#d1fae5,#ccfbf1)}
+.tb-card[data-p="C"] .tb-head{background:linear-gradient(135deg,#fef3c7,#fce7f3)}
+.tb-rec{position:absolute;top:9px;right:9px;background:var(--primary);color:#fff;
+        font-size:10px;font-weight:700;padding:3px 10px;border-radius:99px}
+.tb-body{padding:18px}
+.tb-title{font-size:15px;font-weight:700;color:var(--g900);margin-bottom:7px}
+.tb-desc{font-size:12px;color:var(--g600);line-height:1.7}
+.tb-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+
+/* ─ 餐饮网格 ─ */
+.meal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.meal-card{background:#fff;border:1px solid var(--g200);border-radius:var(--r);
+           padding:15px;box-shadow:var(--sh0)}
+.meal-title{font-size:13px;font-weight:700;color:var(--g900);margin-bottom:5px}
+.meal-desc{font-size:12px;color:var(--g600);line-height:1.6}
+
+/* ─ 会议须知组件 ─ */
+.notice-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:4px}
+.ni-card{display:flex;gap:14px;align-items:flex-start;background:var(--g50);border:1px solid var(--g100);border-radius:var(--r);padding:14px}
+.ni-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.ni-body{flex:1}
+.ni-title{font-size:12px;font-weight:600;color:var(--g500);margin-bottom:3px}
+.ni-val{font-size:14px;font-weight:700;color:var(--g900);margin-bottom:3px}
+.ni-sub{font-size:12px;color:var(--g600);line-height:1.6}
+.ni-link{font-size:12px;color:var(--primary);font-weight:600;text-decoration:none;display:inline-block;margin-top:5px}
+.ni-link:hover{text-decoration:underline}
+.dress-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:4px}
+.dress-card{background:var(--g50);border:1px solid var(--g100);border-radius:var(--r);padding:16px;text-align:center}
+.dress-icon{font-size:32px;margin-bottom:8px}
+.dress-label{font-size:13px;font-weight:700;color:var(--g900);margin-bottom:5px}
+.dress-desc{font-size:12px;color:var(--g600);line-height:1.6}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.contact-card{display:flex;gap:14px;align-items:flex-start;background:var(--g50);border:1px solid var(--g100);border-radius:var(--r);padding:16px}
+.contact-av{width:44px;height:44px;border-radius:50%;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.contact-body{flex:1}
+.contact-name{font-size:15px;font-weight:800;color:var(--g900);margin-bottom:2px}
+.contact-role{font-size:12px;color:var(--primary);font-weight:600;margin-bottom:4px}
+.contact-note{font-size:12px;color:var(--g500);line-height:1.6}
+.checklist-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px}
+
+/* ─ 通用表格 ─ */
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{background:var(--g50);padding:9px 13px;text-align:left;
+        font-weight:600;color:var(--g600);border-bottom:1px solid var(--g200)}
+.tbl td{padding:9px 13px;border-bottom:1px solid var(--g100);
+        color:var(--g700);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--g50)}
+
+/* ─ 清单 ─ */
+ul.ck{list-style:none;display:flex;flex-direction:column;gap:7px}
+ul.ck li{display:flex;align-items:flex-start;gap:7px;font-size:13px;
+         color:var(--g700);line-height:1.6}
+ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* ─ 提示框 ─ */
+.notice{border-radius:var(--r);padding:13px 16px;font-size:13px;
+        line-height:1.7;margin-bottom:20px}
+.notice-orange{background:var(--orange-light);border:1px solid #f59e0b;color:#92400e}
+.notice-blue{background:var(--primary-light);border:1px solid #93c5fd;color:#1e40af}
+.notice-purple{background:#f5f3ff;border:1px solid #c4b5fd;color:#5b21b6}
+/* ─ 会前准备 prep-item ─ */
+.prep-items{display:flex;flex-direction:column;gap:14px}
+.prep-item{display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--g50);border-radius:12px;border:1px solid var(--g200)}
+.prep-item-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.prep-item-body{flex:1}
+.prep-item-title{font-size:14px;font-weight:700;color:var(--g900);margin-bottom:6px}
+.prep-item-desc{font-size:13px;color:var(--g600);line-height:1.7}
+.section-h{font-size:19px;font-weight:800;color:var(--g900);margin-bottom:6px}
+.section-sub{font-size:13px;color:var(--g500);margin-bottom:20px}
+/* ─ 行程概览卡 ─ */
+.overview-card{background:#fff;border-radius:16px;border:1px solid var(--g200);box-shadow:var(--sh0);margin-bottom:20px;overflow:hidden}
+.overview-hd{padding:14px 20px 10px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--g100)}
+.overview-hd-icon{font-size:20px}
+.overview-hd-title{font-size:15px;font-weight:800;color:var(--g900)}
+.overview-hd-sub{font-size:12px;color:var(--g500);margin-left:auto}
+.ovw-list{padding:12px 16px 14px;display:flex;flex-direction:column;gap:0}
+.ovw-item{display:flex;align-items:stretch;gap:0}
+.ovw-left{display:flex;flex-direction:column;align-items:center;width:38px;flex-shrink:0}
+.ovw-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0;border:2px solid #fff;box-shadow:0 0 0 2px var(--g200)}
+.ovw-dot.d-mgr{background:#eff6ff;color:#1d4ed8;box-shadow:0 0 0 2px #bfdbfe}
+.ovw-dot.d-all{background:#f0fdf4;color:#15803d;box-shadow:0 0 0 2px #bbf7d0}
+.ovw-dot.d-arrive{background:#fffbeb;color:#b45309;box-shadow:0 0 0 2px #fde68a}
+.ovw-dot.d-fun{background:#fff7ed;color:#c2410c;box-shadow:0 0 0 2px #fed7aa}
+.ovw-line{flex:1;width:2px;background:var(--g200);margin:2px 0}
+.ovw-body{flex:1;padding:4px 0 14px 12px}
+.ovw-date{font-size:11px;font-weight:700;color:var(--g400);margin-bottom:3px;letter-spacing:.04em}
+.ovw-title{font-size:13px;font-weight:700;color:var(--g900);margin-bottom:4px;line-height:1.5}
+.ovw-note{font-size:12px;color:var(--g500);line-height:1.6}
+.ovw-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.ovw-chip{font-size:11px;padding:2px 8px;border-radius:20px;font-weight:600}
+.ovw-chip.c-blue{background:#eff6ff;color:#1d4ed8}
+.ovw-chip.c-green{background:#f0fdf4;color:#15803d}
+.ovw-chip.c-purple{background:#f5f3ff;color:#6d28d9}
+.ovw-chip.c-orange{background:#fff7ed;color:#c2410c}
+.ovw-chip.c-gray{background:var(--g100);color:var(--g600)}
+
+/* ─ 响应式 ─ */
+@media(max-width:640px){
+  .land-wrap{padding:40px 20px 32px}
+  .land-h1{font-size:30px;white-space:normal}
+  .land-purpose{gap:6px 8px;margin-bottom:18px}
+  .land-purpose-tag{font-size:11px;padding:4px 10px}
+  .land-metas{gap:10px;margin-bottom:24px}
+  .land-meta-dot{display:none}
+  .role-grid{grid-template-columns:1fr;gap:12px}
+  .role-btn{padding:24px 18px}
+  .role-em{font-size:38px;margin-bottom:12px}
+  .land-public{padding:0 20px 8px}
+  .land-pub-grid{grid-template-columns:1fr 1fr}
+  .home-wrap,.content-wrap{padding:20px 14px 60px}
+  .tl-time{width:68px;font-size:10px}
+  .tl-item:not(:last-child)::after{left:88px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .hero{padding:22px 20px;gap:16px}
+  .mod-icon-col{width:88px}
+  .mod-icon-col .em{font-size:32px}
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════
+     入口页：角色选择
+════════════════════════════════ -->
+<div id="pg-landing" class="page active">
+
+  <!-- 现代几何浮动背景 -->
+  <div style="position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden">
+
+    <!-- 大光晕 左上 -->
+    <div style="position:absolute;width:480px;height:480px;border-radius:50%;
+      background:radial-gradient(circle,rgba(52,211,153,.22) 0%,transparent 65%);
+      top:-120px;left:-100px"></div>
+
+    <!-- 大光晕 右下 -->
+    <div style="position:absolute;width:420px;height:420px;border-radius:50%;
+      background:radial-gradient(circle,rgba(16,185,129,.18) 0%,transparent 65%);
+      bottom:-80px;right:-80px"></div>
+
+    <!-- 浮动圆圈 大 左 -->
+    <div style="position:absolute;width:180px;height:180px;border-radius:50%;
+      background:rgba(255,255,255,.28);border:2px solid rgba(255,255,255,.4);
+      top:12%;left:6%;animation:floatA 7s ease-in-out infinite"></div>
+
+    <!-- 浮动圆圈 中 右上 -->
+    <div style="position:absolute;width:100px;height:100px;border-radius:50%;
+      background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.35);
+      top:8%;right:12%;animation:floatB 9s ease-in-out infinite"></div>
+
+    <!-- 浮动圆圈 小 右中 -->
+    <div style="position:absolute;width:60px;height:60px;border-radius:50%;
+      background:rgba(52,211,153,.18);border:1.5px solid rgba(52,211,153,.3);
+      top:38%;right:8%;animation:floatA 6s ease-in-out infinite 1s"></div>
+
+    <!-- 浮动方块 旋转 右上 -->
+    <div style="position:absolute;width:80px;height:80px;border-radius:16px;
+      background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.32);
+      top:15%;right:22%;transform:rotate(22deg);animation:floatB 8s ease-in-out infinite .5s"></div>
+
+    <!-- 浮动方块 左下 -->
+    <div style="position:absolute;width:56px;height:56px;border-radius:12px;
+      background:rgba(251,191,36,.12);border:1.5px solid rgba(251,191,36,.22);
+      bottom:22%;left:10%;transform:rotate(-15deg);animation:floatA 10s ease-in-out infinite 2s"></div>
+
+    <!-- 小点阵 右下 -->
+    <svg style="position:absolute;bottom:10%;right:5%;opacity:.25" width="120" height="120" viewBox="0 0 120 120">
+      <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <circle cx="3" cy="3" r="2.5" fill="#059669"/>
+      </pattern>
+      <rect width="120" height="120" fill="url(#dots)"/>
+    </svg>
+
+    <!-- 小点阵 左上 -->
+    <svg style="position:absolute;top:8%;left:30%;opacity:.18" width="80" height="80" viewBox="0 0 80 80">
+      <pattern id="dots2" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+        <circle cx="2.5" cy="2.5" r="2" fill="#10B981"/>
+      </pattern>
+      <rect width="80" height="80" fill="url(#dots2)"/>
+    </svg>
+
+    <!-- 波浪线 底部装饰 -->
+    <svg style="position:absolute;bottom:0;left:0;width:100%;opacity:.15" viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,120 L0,120 Z" fill="#059669"/>
+    </svg>
+    <svg style="position:absolute;bottom:0;left:0;width:100%;opacity:.1" viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,80 C360,40 720,110 1080,60 C1260,35 1380,85 1440,80 L1440,120 L0,120 Z" fill="#34D399"/>
+    </svg>
+
+    <!-- 加号 装饰 -->
+    <svg style="position:absolute;top:25%;left:3%;opacity:.2" width="28" height="28" viewBox="0 0 28 28">
+      <rect x="12" y="2" width="4" height="24" rx="2" fill="#059669"/>
+      <rect x="2" y="12" width="24" height="4" rx="2" fill="#059669"/>
+    </svg>
+    <svg style="position:absolute;top:60%;right:18%;opacity:.18" width="22" height="22" viewBox="0 0 22 22">
+      <rect x="9" y="1" width="4" height="20" rx="2" fill="#10B981"/>
+      <rect x="1" y="9" width="20" height="4" rx="2" fill="#10B981"/>
+    </svg>
+
+  </div>
+
+  <style>
+  @keyframes floatA{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(3deg)}}
+  @keyframes floatB{0%,100%{transform:translateY(0) rotate(22deg)}50%{transform:translateY(-14px) rotate(26deg)}}
+  </style>
+
+  <div class="land-wrap">
+    <span class="land-pill">📅 2026 · H1 · 采购部</span>
+    <h1 class="land-h1">主管述职会 & 务虚会</h1>
+    <p class="land-sub">2026 年 H1 采购部主管述职会 + 务虚会</p>
+    <div class="land-purpose">
+      <span class="land-purpose-tag">📊 H1述职复盘</span>
+      <span class="land-purpose-tag">🤝 新班子起步与破冰</span>
+      <span class="land-purpose-tag">🏅 职级标准升级 × AI</span>
+      <span class="land-purpose-tag">🤖 AI影响与个人应用</span>
+      <span class="land-purpose-tag">💡 新主管赋能</span>
+      <span class="land-purpose-tag">🎉 团队建设</span>
+    </div>
+    <div class="land-divider"></div>
+    <div class="land-metas">
+      <span class="land-meta">📍 杭州 · 莫干山</span>
+      <span class="land-meta-dot"></span>
+      <span class="land-meta">🗓️ 7月2日—5日（主管）/ 7月3日—5日（非主管）</span>
+      <span class="land-meta-dot"></span>
+      <span class="land-meta">👥 共14人</span>
+    </div>
+    <p class="land-hint">— 请选择你的身份进入 —</p>
+    <div class="role-grid">
+      <div class="role-btn" onclick="enterManager()">
+        <!-- 主管：商务卡通人物 -->
+        <span class="role-em">
+          <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 身体/西装 -->
+            <ellipse cx="36" cy="62" rx="22" ry="14" fill="#1E40AF"/>
+            <path d="M22,56 Q30,66 36,64 Q42,66 50,56 Q44,52 36,52 Q28,52 22,56Z" fill="#2563EB"/>
+            <!-- 领带 -->
+            <polygon points="36,52 33,58 36,72 39,58" fill="#FBBF24"/>
+            <!-- 脖子 -->
+            <rect x="32" y="44" width="8" height="10" rx="3" fill="#FDE68A"/>
+            <!-- 头 -->
+            <ellipse cx="36" cy="34" rx="16" ry="16" fill="#FDE68A"/>
+            <!-- 腮红 -->
+            <ellipse cx="25" cy="37" rx="4" ry="3" fill="#FCA5A5" opacity=".5"/>
+            <ellipse cx="47" cy="37" rx="4" ry="3" fill="#FCA5A5" opacity=".5"/>
+            <!-- 眼睛 -->
+            <ellipse cx="30" cy="32" rx="3.5" ry="4" fill="#fff"/>
+            <ellipse cx="42" cy="32" rx="3.5" ry="4" fill="#fff"/>
+            <circle cx="31" cy="33" r="2.2" fill="#1E293B"/>
+            <circle cx="43" cy="33" r="2.2" fill="#1E293B"/>
+            <circle cx="32" cy="32" r="0.9" fill="#fff"/>
+            <circle cx="44" cy="32" r="0.9" fill="#fff"/>
+            <!-- 眉毛 -->
+            <path d="M27,27 Q30,25 33,27" stroke="#92400E" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M39,27 Q42,25 45,27" stroke="#92400E" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <!-- 嘴巴 -->
+            <path d="M30,41 Q36,46 42,41" stroke="#92400E" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <!-- 头发 -->
+            <path d="M20,30 Q20,18 36,18 Q52,18 52,30 Q50,22 36,20 Q22,22 20,30Z" fill="#92400E"/>
+            <!-- 金色星章 -->
+            <circle cx="54" cy="18" r="9" fill="#FBBF24" stroke="#F59E0B" stroke-width="1.5"/>
+            <polygon points="54,11 55.8,16.2 61.2,16.2 56.8,19.4 58.5,24.6 54,21.4 49.5,24.6 51.2,19.4 46.8,16.2 52.2,16.2" fill="#fff" opacity=".9"/>
+          </svg>
+        </span>
+        <div class="role-name">主管视图</div>
+        <div class="role-desc">完整议程 + 会前准备<br>7月2日—5日 · 仅主管可访问</div>
+        <span class="role-chip role-chip-m">🔒 主管专属</span>
+      </div>
+      <div class="role-btn" onclick="goHome('staff')">
+        <!-- 全员：绿色贝雷帽卡通人物 -->
+        <span class="role-em">
+          <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 身体/T恤 -->
+            <ellipse cx="36" cy="62" rx="22" ry="14" fill="#059669"/>
+            <path d="M22,56 Q30,66 36,64 Q42,66 50,56 Q44,52 36,52 Q28,52 22,56Z" fill="#10B981"/>
+            <!-- 脖子 -->
+            <rect x="32" y="44" width="8" height="10" rx="3" fill="#FDE68A"/>
+            <!-- 头 -->
+            <ellipse cx="36" cy="34" rx="16" ry="16" fill="#FDE68A"/>
+            <!-- 腮红 -->
+            <ellipse cx="25" cy="38" rx="4" ry="3" fill="#6EE7B7" opacity=".65"/>
+            <ellipse cx="47" cy="38" rx="4" ry="3" fill="#6EE7B7" opacity=".65"/>
+            <!-- 眼睛 -->
+            <ellipse cx="30" cy="33" rx="3.5" ry="4" fill="#fff"/>
+            <ellipse cx="42" cy="33" rx="3.5" ry="4" fill="#fff"/>
+            <circle cx="31" cy="34" r="2.2" fill="#1E293B"/>
+            <circle cx="43" cy="34" r="2.2" fill="#1E293B"/>
+            <circle cx="32" cy="33" r="0.9" fill="#fff"/>
+            <circle cx="44" cy="33" r="0.9" fill="#fff"/>
+            <!-- 眉毛 -->
+            <path d="M27,28 Q30,26 33,28" stroke="#065F46" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M39,28 Q42,26 45,28" stroke="#065F46" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <!-- 大笑嘴 -->
+            <path d="M29,41 Q36,48 43,41" stroke="#065F46" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <!-- 头发 -->
+            <path d="M20,31 Q20,19 36,19 Q52,19 52,31 Q50,23 36,21 Q22,23 20,31Z" fill="#78350F"/>
+            <!-- 绿色贝雷帽 -->
+            <ellipse cx="36" cy="22" rx="18" ry="9" fill="#EA580C"/>
+            <ellipse cx="36" cy="20" rx="16" ry="7" fill="#F97316"/>
+            <ellipse cx="43" cy="18" rx="4" ry="3" fill="#FCA5A5"/>
+            <!-- 帽子小球 -->
+            <circle cx="36" cy="14" r="3.5" fill="#FDBA74"/>
+            <!-- 帽沿 -->
+            <ellipse cx="36" cy="24" rx="20" ry="4" fill="#C2410C" opacity=".7"/>
+          </svg>
+        </span>
+        <div class="role-name">非主管视图</div>
+        <div class="role-desc">议程总览 + 团建方案<br>7月3日—5日 · 全体非主管人员</div>
+        <span class="role-chip role-chip-s">✅ 全员可见</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 全员公共快捷入口 -->
+  <div class="land-public">
+    <div class="land-public-label">— 全员公共信息 —</div>
+    <div class="land-pub-grid">
+      <div class="land-pub-btn" onclick="go('pg-staff-people')">
+        <div class="land-pub-em land-pub-em-people">👥</div>
+        <div class="land-pub-body">
+          <div class="land-pub-title">参会人员 & 分组</div>
+          <div class="land-pub-desc">全体名单 · 主管与骨干 · 世界咖啡分组</div>
+        </div>
+        <span class="land-pub-arrow">→</span>
+      </div>
+      <div class="land-pub-btn" onclick="go('pg-staff-notice')">
+        <div class="land-pub-em land-pub-em-notice">📌</div>
+        <div class="land-pub-body">
+          <div class="land-pub-title">会议须知</div>
+          <div class="land-pub-desc">地址 · 交通 · 住宿 · 着装 · 报销 · 行前清单</div>
+        </div>
+        <span class="land-pub-arrow">→</span>
+      </div>
+      <div class="land-pub-btn" onclick="go('pg-prep')">
+        <div class="land-pub-em" style="background:linear-gradient(135deg,#f59e0b,#d97706)">📝</div>
+        <div class="land-pub-body">
+          <div class="land-pub-title">会前准备</div>
+          <div class="land-pub-desc">述职 · AI实验 · 职级预读 · 各组专项任务</div>
+        </div>
+        <span class="land-pub-arrow">→</span>
+      </div>
+      <div class="land-pub-btn" onclick="go('pg-staff-team')">
+        <div class="land-pub-em" style="background:linear-gradient(135deg,#10b981,#059669)">🎉</div>
+        <div class="land-pub-body">
+          <div class="land-pub-title">团建方案</div>
+          <div class="land-pub-desc">Day4 骑行徒步 · 住宿推荐 · 餐饮安排</div>
+        </div>
+        <span class="land-pub-arrow">→</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="land-foot">采购部 HR · 余琪 整理制作</p>
+</div>
+
+<!-- ════════════════════════════════
+     主管主页：模块 Banner 卡片
+════════════════════════════════ -->
+<div id="pg-manager-home" class="page">
+  <nav class="topbar">
+    <div class="topbar-in">
+      <div class="tb-left">
+        <div class="tb-logo">🏢</div>
+        <span class="tb-title">采购部 2026 H1 述职会+务虚会</span>
+        <span class="tb-chip tb-chip-m">👔 主管</span>
+      </div>
+      <div class="tb-right">
+        <button class="btn-back" onclick="go('pg-landing')">🔄 切换身份</button>
+      </div>
+    </div>
+  </nav>
+  <div class="home-wrap">
+    <div class="home-greeting">
+      <div class="home-greeting-icon">👋</div>
+      <div>
+        <div class="home-greeting-title">你好，主管！欢迎查看务虚会资料</div>
+        <div class="home-greeting-sub">7月2日—5日 · 浙江莫干山 · 以下是你的专属模块，点击 banner 进入</div>
+      </div>
+    </div>
+
+    <!-- 主管行程概览 -->
+    <div class="overview-card">
+      <div class="overview-hd">
+        <span class="overview-hd-icon">🗺️</span>
+        <span class="overview-hd-title">行程一览</span>
+        <span class="overview-hd-sub">主管全程视角</span>
+      </div>
+      <div class="ovw-list">
+        <div class="ovw-item">
+          <div class="ovw-left"><div class="ovw-dot d-arrive">出</div><div class="ovw-line"></div></div>
+          <div class="ovw-body">
+            <div class="ovw-date">7月1日（周三）· 出发日</div>
+            <div class="ovw-title">🚗 主管出发 · 驾车前往德清</div>
+            <div class="ovw-note">主管团队从北京出发，16:00-21:13 抵达德清，驾车接送至裸心谷，办理入住</div>
+            <div class="ovw-chips"><span class="ovw-chip c-gray">🚗 驾车出发</span><span class="ovw-chip c-blue">🏨 裸心谷入住</span></div>
+          </div>
+        </div>
+        <div class="ovw-item">
+          <div class="ovw-left"><div class="ovw-dot d-arrive">1</div><div class="ovw-line"></div></div>
+          <div class="ovw-body">
+            <div class="ovw-date">7月2日（周四）· 述职日</div>
+            <div class="ovw-title">🎤 H1 述职 · 10:00 正式开会</div>
+            <div class="ovw-note">主管团队全天述职，10:00 开始 H1 述职会，晚上新老主管破冰晚宴</div>
+            <div class="ovw-chips"><span class="ovw-chip c-blue">🎤 H1半年述职</span><span class="ovw-chip c-gray">👔 主管专场</span></div>
+          </div>
+        </div>
+        <div class="ovw-item">
+          <div class="ovw-left"><div class="ovw-dot d-mgr">2</div><div class="ovw-line"></div></div>
+          <div class="ovw-body">
+            <div class="ovw-date">7月3日（周五）· 骨干中午抵达，下午全员汇合</div>
+            <div class="ovw-title">🤖 上午主管专场 → 下午全员AI讨论</div>
+            <div class="ovw-note">上午主管先行讨论后续两大议题方向；骨干中午抵达，15:00 全员共同讨论「AI对采购的影响」</div>
+            <div class="ovw-chips"><span class="ovw-chip c-purple">💡 AI能力规划</span><span class="ovw-chip c-green">🌍 15:00全员合流</span></div>
+          </div>
+        </div>
+        <div class="ovw-item">
+          <div class="ovw-left"><div class="ovw-dot d-all">3</div><div class="ovw-line"></div></div>
+          <div class="ovw-body">
+            <div class="ovw-date">7月4日（周六）· 采购通道标准升级专场</div>
+            <div class="ovw-title">🏅 全员 · 职级标准升级讨论 + 晚宴嗨</div>
+            <div class="ovw-note">9:00 起全天讨论采购通道职级标准 V3 升级（含世界咖啡分组），晚上一起嗨</div>
+            <div class="ovw-chips"><span class="ovw-chip c-purple">☕ 世界咖啡</span><span class="ovw-chip c-orange">🎊 晚宴</span></div>
+          </div>
+        </div>
+        <div class="ovw-item">
+          <div class="ovw-left"><div class="ovw-dot d-fun">4</div></div>
+          <div class="ovw-body">
+            <div class="ovw-date">7月5日（周日）· 收尾返程</div>
+            <div class="ovw-title">🚴 全员团建 + G876 15:35 返京</div>
+            <div class="ovw-note">上午莫干山骑行/徒步，下午自由放松，15:30 驾车送德清站乘 G876 返京</div>
+            <div class="ovw-chips"><span class="ovw-chip c-orange">🚴 团建放松</span><span class="ovw-chip c-gray">🚄 G876返程</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="module-list">
+      <div class="mod-banner mod-c-blue" onclick="go('pg-manager-agenda')">
+        <div class="mod-banner-inner">
+          <div class="mod-icon-col">
+            <span class="em">📋</span>
+            <span class="mod-label">完整议程</span>
+          </div>
+          <div class="mod-body">
+            <div class="mod-title">完整议程</div>
+            <div class="mod-desc">4天全程议程详情，含述职安排、世界咖啡分组、AI讨论及团建</div>
+            <div class="mod-tags">
+              <span class="tag t-blue">🎤 H1述职</span>
+              <span class="tag t-purple">☕ 世界咖啡</span>
+              <span class="tag t-cyan">🤖 AI讨论</span>
+              <span class="tag t-orange">🚴 团建</span>
+            </div>
+          </div>
+          <div class="mod-arrow">→</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     全员主页：模块 Banner 卡片
+════════════════════════════════ -->
+<div id="pg-staff-home" class="page">
+  <nav class="topbar">
+    <div class="topbar-in">
+      <div class="tb-left">
+        <div class="tb-logo">🏢</div>
+        <span class="tb-title">采购部 2026 H1 述职会+务虚会</span>
+        <span class="tb-chip tb-chip-s">✅ 全员</span>
+      </div>
+      <div class="tb-right">
+        <button class="btn-back" onclick="go('pg-landing')">🔄 切换身份</button>
+      </div>
+    </div>
+  </nav>
+  <div class="home-wrap">
+    <div class="home-greeting">
+      <div class="home-greeting-icon">🌿</div>
+      <div>
+        <div class="home-greeting-title">你好！欢迎查看务虚会资料</div>
+        <div class="home-greeting-sub">7月3日—5日 · 浙江莫干山 · 以下是全员专属模块</div>
+      </div>
+    </div>
+
+    <!-- 全员行程概览 -->
+    <div class="overview-card">
+      <div class="overview-hd">
+        <span class="overview-hd-icon">🗺️</span>
+        <span class="overview-hd-title">行程一览</span>
+        <span class="overview-hd-sub">骨干全员视角</span>
+      </div>
+      <div class="ovw-list">
+        <div class="ovw-item">
+          <div class="ovw-left"><div class="ovw-dot d-arrive">出</div><div class="ovw-line"></div></div>
+          <div class="ovw-body">
+            <div class="ovw-date">7月3日（周五）上午 · 出发日</div>
+            <div class="ovw-title">🚄 乘 G815 出发 · 下午正式参会</div>
+            <div class="ovw-note">北京南 07:04 发车 → 德清 12:47 抵达，接送至裸心谷，午餐+休整后 15:00 正式开始全员活动</div>
+            <div class="ovw-chips"><span class="ovw-chip c-gray">G815 07:04发</span><span class="ovw-chip c-green">15:00 开始参会</span></div>
+          </div>
+        </div>
+        <div class="ovw-item">
+          <div class="ovw-left"><div class="ovw-dot d-all">1</div><div class="ovw-line"></div></div>
+          <div class="ovw-body">
+            <div class="ovw-date">7月3日（周五）下午</div>
+            <div class="ovw-title">🤖 AI 对采购的影响 · 全员讨论</div>
+            <div class="ovw-note">15:00 起：AI 个人实验分享 → AI对采购影响讨论 → 各组汇报，晚餐后早点休息</div>
+            <div class="ovw-chips"><span class="ovw-chip c-blue">💡 AI实验分享</span><span class="ovw-chip c-purple">🤖 影响讨论</span></div>
+          </div>
+        </div>
+        <div class="ovw-item">
+          <div class="ovw-left"><div class="ovw-dot d-mgr">2</div><div class="ovw-line"></div></div>
+          <div class="ovw-body">
+            <div class="ovw-date">7月4日（周六）全天 · 采购通道标准升级专场</div>
+            <div class="ovw-title">🏅 采购职级标准升级讨论 + 晚宴嗨</div>
+            <div class="ovw-note">9:00 起全天：职级标准 V3 升级讨论 + 世界咖啡分组（按你所在组的预读任务提前准备！），晚上一起嗨</div>
+            <div class="ovw-chips"><span class="ovw-chip c-purple">☕ 世界咖啡</span><span class="ovw-chip c-orange">🎊 晚宴</span></div>
+          </div>
+        </div>
+        <div class="ovw-item">
+          <div class="ovw-left"><div class="ovw-dot d-fun">3</div></div>
+          <div class="ovw-body">
+            <div class="ovw-date">7月5日（周日）· 返程日</div>
+            <div class="ovw-title">🚴 团建放松 + G876 15:35 返京</div>
+            <div class="ovw-note">上午莫干山骑行/徒步，午餐后自由放松，15:30 驾车送德清站乘 G876 返北京南（21:23 到）</div>
+            <div class="ovw-chips"><span class="ovw-chip c-orange">🚴 骑行徒步</span><span class="ovw-chip c-gray">G876 15:35发</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="module-list">
+      <div class="mod-banner mod-c-green" onclick="go('pg-staff-agenda')">
+        <div class="mod-banner-inner">
+          <div class="mod-icon-col">
+            <span class="em">📋</span>
+            <span class="mod-label">议程总览</span>
+          </div>
+          <div class="mod-body">
+            <div class="mod-title">全员议程总览</div>
+            <div class="mod-desc">你需要参加的全部环节：AI讨论、职级标准升级、晚宴嗨、Day4团建</div>
+            <div class="mod-tags">
+              <span class="tag t-green">🌍 全员参与</span>
+              <span class="tag t-cyan">🤖 AI讨论</span>
+              <span class="tag t-orange">🎊 晚宴嗨</span>
+              <span class="tag t-blue">🚴 Day4团建</span>
+            </div>
+          </div>
+          <div class="mod-arrow">→</div>
+        </div>
+      </div>
+    </div>
+    <div class="notice notice-blue" style="margin:0 0 0 0;border-radius:12px">
+      💡 <strong>参会人员、会议须知、会前准备、团建方案</strong>已放在首页公共区，可直接从首页进入。
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+  全员：会议须知
+════════════════════════════ -->
+<!-- ════════════════════════════
+  全员：会前准备
+════════════════════════════ -->
+<div id="pg-prep" class="page">
+  <nav class="topbar">
+    <div class="topbar-in">
+      <div class="tb-left">
+        <div class="tb-logo">📝</div>
+        <span class="tb-title">会前准备</span>
+        <span class="tb-chip tb-chip-s">✅ 全员必读</span>
+      </div>
+      <div class="tb-right">
+        <button class="btn-home" onclick="go('pg-landing')">← 返回首页</button>
+      </div>
+    </div>
+  </nav>
+  <div class="content-wrap">
+
+    <div class="hero" style="background:linear-gradient(135deg,#d97706,#b45309)">
+      <div class="hero-icon">📝</div>
+      <div class="hero-body">
+        <div class="hero-title">会前准备清单</div>
+        <div class="hero-metas">
+          <span class="hero-meta">⏰ 请在出发前完成</span>
+          <span class="hero-meta">📋 分主管 / 全员 两类任务</span>
+          <span class="hero-meta">🗓️ 7月3日出发前</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice notice-orange">⚠️ <strong>重要提示：</strong>请认真准备以下内容，特别是 AI 实验任务与职级标准预读——这是两天讨论的核心输入，提前准备越充分，现场讨论越有价值！</div>
+
+    <!-- ① 全员必做：AI实验 -->
+    <div class="card">
+      <div class="card-h">🤖 【全员必做】AI 实验任务（7月3日前完成）</div>
+      <p style="font-size:14px;color:var(--g600);margin-bottom:16px;line-height:1.8">
+        在出发前，<strong>请每个人用 AI 工具完成一个你日常工作中的具体任务</strong>，并记录以下五点，现场直接口头分享（约5分钟/人）：
+      </p>
+      <div class="notice notice-blue" style="margin-bottom:16px">
+        📌 记录要点：<br>
+        ① 用了什么工具（Kimi / Claude / GPT / 豆包 等）<br>
+        ② 做了什么任务（越具体越好，例如"整理供应商尽调报告"）<br>
+        ③ AI 输出质量如何（惊艳 / 一般 / 差强人意）<br>
+        ④ 哪些地方好、哪些地方差<br>
+        ⑤ 你的判断：这个任务 AI 是"替代 / 辅助 / 还是不行"
+      </div>
+      <div class="notice notice-purple" style="margin:0">
+        💡 <strong>思考延伸：</strong>结合你所在中心的采购业务，<strong>AI 落地最可能的 1-2 个场景是什么？</strong>——带着这个问题来，Day1 下午讨论会用到。
+      </div>
+    </div>
+
+    <!-- ② 全员必读：职级标准 -->
+    <div class="card">
+      <div class="card-h">🏅 【全员必读】职级标准预读（重要！）</div>
+      <p style="font-size:14px;color:var(--g600);margin-bottom:16px;line-height:1.8">
+        Day2 将用整天时间讨论「采购通道职级标准 V3 升级」，这是本次务虚会最重要的产出。
+        <strong>请提前阅读并理解现有标准</strong>，不然现场很容易跟不上节奏。
+      </p>
+      <div class="table-grid" style="margin-bottom:16px">
+        <div class="table-card">
+          <div class="tc-title">📄 必读文档</div>
+          <div class="tc-mem">
+            <div class="tc-mem-item">采购通道专业职级标准 2023（V2 试行版）</div>
+            <div class="tc-mem-item">职级标准迭代：AI 能力纳入职级标准（背景文档）</div>
+          </div>
+          <div class="tc-focus"><div class="tc-focus-label">请重点关注</div>现有标准是 5 维度 × 7 职级结构（业绩战功 / 专业力 / 通用力 / 认知水平 / 团队管理），本次升级核心议题是 <strong>AI 能力加在哪里、怎么分层</strong></div>
+        </div>
+      </div>
+
+      <div class="section-h" style="margin:12px 0 8px">各组专项预读任务</div>
+      <div class="table-grid">
+        <div class="table-card">
+          <div class="tc-title">第一组 <span class="tc-badge t-blue">通用力方向</span></div>
+          <div class="tc-mem">
+            <div class="tc-mem-item"><span class="star">★</span> 郎咸志（组长）</div>
+            <div class="tc-mem-item">阎梦 · 于蕊 · 张昊楠</div>
+          </div>
+          <div class="tc-focus">
+            <div class="tc-focus-label">专项预读</div>
+            熟读通道标准中「通用力」模块，锚定两个问题：<br>
+            ① AI 工具能力应该加在通用力维度的哪个位置？<br>
+            ② 各职级的 AI 能力如何分层区分？<br>
+            <strong>参考文档：</strong>快手职级通用能力词典 2.0
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="tc-title">第二组 <span class="tc-badge t-purple">专业力方向</span></div>
+          <div class="tc-mem">
+            <div class="tc-mem-item"><span class="star">★</span> 邹赫（组长）</div>
+            <div class="tc-mem-item">周程 · 梁佳阳 · 余琪</div>
+          </div>
+          <div class="tc-focus">
+            <div class="tc-focus-label">专项预读</div>
+            熟读通道标准中「专业力」模块，锚定：<br>
+            AI 对采购专业力的改变是什么？品类策略中 AI 与人工的分工线在哪？<br>
+            <strong>参考文档：</strong>采购通道专业力指的是什么
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="tc-title">第三组 <span class="tc-badge t-green">业绩战功方向</span></div>
+          <div class="tc-mem">
+            <div class="tc-mem-item"><span class="star">★</span> 柴博福（组长）</div>
+            <div class="tc-mem-item">孙爽 · 赵元泽 · 李玉辉</div>
+          </div>
+          <div class="tc-focus">
+            <div class="tc-focus-label">专项预读</div>
+            熟读通道标准中「业绩战功」模块，锚定：<br>
+            AI 辅助决策下如何衡量个人战功？业绩认定标准是否需要调整？
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ③ 主管专属 -->
+    <div class="card">
+      <div class="card-h">👔 【主管专属】额外准备事项</div>
+      <div class="prep-items">
+        <div class="prep-item">
+          <div class="prep-item-icon" style="background:#eff6ff">🎤</div>
+          <div class="prep-item-body">
+            <div class="prep-item-title">H1 述职报告</div>
+            <div class="prep-item-desc">参考模板准备述职报告，控时 45min 以内（+15min Q&A）。内容要求：H1 核心成果 → 问题与挑战 → H2 计划 → 资源需求。请提前在文档系统创建副本，现场共享屏幕演示。</div>
+          </div>
+        </div>
+        <div class="prep-item">
+          <div class="prep-item-icon" style="background:#fef3c7">💡</div>
+          <div class="prep-item-body">
+            <div class="prep-item-title">中心 AI 使用现状梳理</div>
+            <div class="prep-item-desc">梳理你所在中心当前已经在 AI 领域做了哪些尝试：用了哪些工具？解决了什么问题？效果如何？这是 Day1 上午主管讨论「AI 能力提升计划」的基础输入。</div>
+          </div>
+        </div>
+        <div class="prep-item">
+          <div class="prep-item-icon" style="background:#f0fdf4">🤝</div>
+          <div class="prep-item-body">
+            <div class="prep-item-title">给新主管的建议</div>
+            <div class="prep-item-desc">
+              <strong>新主管（周程、孙爽）：</strong>提前想好你作为新主管最困惑、最需要帮助的 1-2 个问题，现场提出。<br>
+              <strong>资深主管：</strong>每人必须准备 1-2 条实用的管理建议，现场口述，拒绝大道理，越具体越好。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 附录：讨论框架参考 -->
+    <div class="card">
+      <div class="card-h">📚 附录：各议题讨论框架参考</div>
+
+      <div class="section-h" style="margin:0 0 12px">议题一：AI 对采购的影响及个人应用</div>
+      <p style="font-size:13px;color:var(--g600);margin-bottom:12px;line-height:1.7">本次讨论分三层递进，从感性认知→战略影响→个人落地行动：</p>
+
+      <div style="margin-bottom:20px">
+        <div style="font-size:13px;font-weight:700;color:#1d4ed8;padding:8px 14px;background:#eff6ff;border-radius:8px;margin-bottom:10px">📌 第一层：AI 对采购流程的影响（可落地、可量化）</div>
+        <table class="tbl">
+          <tr><th>采购环节</th><th>AI 正在改变什么</th><th>采购部的应对方向</th></tr>
+          <tr><td>需求管理</td><td>AI 可做需求预测、规格标准化建议</td><td>人工拍脑袋 → 模型辅助</td></tr>
+          <tr><td>供应商搜索/尽调</td><td>AI 可实时抓取供应商风险信号</td><td>年度审计 → 实时信号流</td></tr>
+          <tr><td>比价/成本分析</td><td>AI 可做多维比价、TCO 建模</td><td>执行层大量自动化</td></tr>
+          <tr><td>合同审查</td><td>AI 可做条款比对、合规检查</td><td>标准条款 AI 自动审查</td></tr>
+          <tr><td>供应商绩效监控</td><td>AI 可做实时绩效仪表盘</td><td>季度复盘 → 实时监控</td></tr>
+        </table>
+      </div>
+
+      <div style="margin-bottom:20px">
+        <div style="font-size:13px;font-weight:700;color:#7c3aed;padding:8px 14px;background:#f5f3ff;border-radius:8px;margin-bottom:10px">📌 第二层：AI 对采购职能定位的影响（战略层讨论）</div>
+        <div class="notice notice-purple" style="margin:0">
+          ① 执行层采购员角色会缩窄——E6-E8 的操作性工作会被 AI 替代<br>
+          ② 策略层采购角色会上升——需求管理、供应商关系、品类策略成为核心<br>
+          ③ 采购成熟度可能调整——P4 之后可能加 P5 = AI 流程再造能力
+        </div>
+      </div>
+
+      <div style="margin-bottom:20px">
+        <div style="font-size:13px;font-weight:700;color:#059669;padding:8px 14px;background:#f0fdf4;border-radius:8px;margin-bottom:10px">📌 第三层：个人 AI 应用落地（产出目标）</div>
+        <ul class="ck">
+          <li>每个中心定义 2-3 个 AI 优先应用场景（不是"未来愿景"，是"下个月就可以开始做的"）</li>
+          <li>共识底线原则：AI 辅助决策，人做最终判断</li>
+          <li>明确学习机制：每月一次 AI 应用分享，上手实践，非纯培训</li>
+        </ul>
+      </div>
+
+      <div style="border-top:1px solid var(--g200);padding-top:18px;margin-top:4px">
+        <div class="section-h" style="margin:0 0 12px">议题二：职级标准 V3 升级——AI 能力如何分层？</div>
+        <div style="font-size:13px;font-weight:700;color:#1d4ed8;padding:8px 14px;background:#eff6ff;border-radius:8px;margin-bottom:12px">参考框架：通用力维度 AI 能力分层</div>
+        <table class="tbl">
+          <tr><th>职级</th><th>AI 工具能力预期</th></tr>
+          <tr><td>E6-E8</td><td>能用 AI 辅助基础操作（合同比对、数据整理、信息检索）</td></tr>
+          <tr><td>E9-E10</td><td>能用 AI 提升工作效率（比价分析、供应商尽调辅助、需求文档生成），并判断 AI 输出可靠性</td></tr>
+          <tr><td>E11-E12</td><td>能用 AI 做品类策略分析、成本结构建模、供应商风险预警，能定义"AI 在这个品类里能做什么、不能做什么"</td></tr>
+          <tr><td>E13-E14</td><td>能定义哪些采购环节适合 AI 重构，能推动采购+AI 流程再造，能判断 AI 输出的边界和盲区</td></tr>
+        </table>
+        <div class="notice notice-blue" style="margin-top:12px">
+          🎯 <strong>讨论产出目标：</strong>共识职级标准升级方向（AI 加在哪几个维度、怎么分层），明确 V3 修订时间表（初稿时间、试用时间、负责人）
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="pg-staff-notice" class="page">
+  <nav class="topbar">
+    <div class="topbar-in">
+      <div class="tb-left">
+        <div class="tb-logo">📌</div>
+        <span class="tb-title">会议须知</span>
+        <span class="tb-chip tb-chip-s">✅ 全员</span>
+      </div>
+      <div class="tb-right">
+        <button class="btn-home" onclick="go('pg-landing')">← 返回首页</button>
+      </div>
+    </div>
+  </nav>
+  <div class="content-wrap">
+
+    <div class="hero" style="background:linear-gradient(135deg,#0891b2,#0e7490)">
+      <div class="hero-icon">📌</div>
+      <div class="hero-body">
+        <div class="hero-title">会议须知</div>
+        <div class="hero-metas">
+          <span class="hero-meta">🗓️ 7月2日—5日（4天3晚）</span>
+          <span class="hero-meta">📍 浙江·莫干山·裸心谷</span>
+          <span class="hero-meta">👥 全体参会人员必读</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 地址 & 导航 -->
+    <div class="card">
+      <div class="card-h">📍 会议 & 住宿地址</div>
+      <div class="notice-grid">
+        <div class="ni-card">
+          <div class="ni-icon" style="background:#dbeafe">🏨</div>
+          <div class="ni-body">
+            <div class="ni-title">住宿 & 会议场地</div>
+            <div class="ni-val">裸心谷度假酒店</div>
+            <div class="ni-sub">浙江省湖州市德清县莫干山镇燎原村裸心谷</div>
+            <a class="ni-link" href="https://maps.apple.com/?q=裸心谷" target="_blank">📱 点击导航 →</a>
+          </div>
+        </div>
+        <div class="ni-card">
+          <div class="ni-icon" style="background:#d1fae5">🚉</div>
+          <div class="ni-body">
+            <div class="ni-title">最近高铁站</div>
+            <div class="ni-val">德清站（高铁）</div>
+            <div class="ni-sub">站到裸心谷约30分钟车程，可打车或统一接送</div>
+          </div>
+        </div>
+        <div class="ni-card">
+          <div class="ni-icon" style="background:#fef3c7">✈️</div>
+          <div class="ni-body">
+            <div class="ni-title">最近机场</div>
+            <div class="ni-val">杭州萧山国际机场</div>
+            <div class="ni-sub">机场到裸心谷约1.5小时车程（走104国道或高速）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 交通安排 -->
+    <div class="card">
+      <div class="card-h">🚄 交通安排</div>
+      <div class="ptl">
+        <div class="ptl-item">
+          <div class="ptl-dot ptl-todo"></div>
+          <div class="ptl-date">7月1日</div>
+          <div class="ptl-task"><strong>主管出发：</strong>主管团队从北京出发，16:00-21:13 抵达德清，驾车接送至裸心谷，办理入住</div>
+        </div>
+        <div class="ptl-item">
+          <div class="ptl-dot ptl-todo"></div>
+          <div class="ptl-date">7月3日上午</div>
+          <div class="ptl-task"><strong>骨干出发：</strong>骨干6人乘高铁 G815（北京南 07:04 → 德清 12:47），统一安排接送至裸心谷，午餐时汇合</div>
+        </div>
+        <div class="ptl-item">
+          <div class="ptl-dot ptl-todo"></div>
+          <div class="ptl-date">7月5日</div>
+          <div class="ptl-task"><strong>统一返程：</strong>驾车送德清站，乘高铁 G876（15:35 → 北京南 21:23）返京</div>
+        </div>
+      </div>
+      <div class="notice notice-blue" style="margin-top:8px">🚌 <strong>统一接送：</strong>HR将提前收集大家的车次信息，安排接送车。请在<strong>6月25日前</strong>将出行信息发给余琪。</div>
+    </div>
+
+    <!-- 住宿安排 -->
+    <div class="card">
+      <div class="card-h">🛏️ 住宿安排</div>
+      <div class="ni-card" style="margin-bottom:14px">
+        <div class="ni-icon" style="background:#ede9fe">🏡</div>
+        <div class="ni-body">
+          <div class="ni-title">裸心谷 · 独栋树屋/别墅</div>
+          <div class="ni-sub">所有参会人员入住裸心谷，每人一间独立别墅/树屋，含早餐。<br>入住时间：7月1日（主管）/ 7月2日晚（骨干），退房时间：7月5日12:00前。</div>
+        </div>
+      </div>
+      <ul class="ck">
+        <li>请自备常用洗漱用品（酒店有基本配备，但建议自备惯用品牌）</li>
+        <li>山区早晚温差较大，7月均温25—32°C，建议携带薄外套或防晒衣</li>
+        <li>房间如有需求（枕头偏好、床型等）请提前告知余琪</li>
+        <li>贵重物品妥善保管，裸心谷部分区域户外开放</li>
+      </ul>
+    </div>
+
+    <!-- 着装建议 -->
+    <div class="card">
+      <div class="card-h">👗 着装建议</div>
+      <div class="dress-grid">
+        <div class="dress-card">
+          <div class="dress-icon">👔</div>
+          <div class="dress-label">Day1—3 会议</div>
+          <div class="dress-desc">商务休闲即可，无需正装。<br>舒适为主，避免过于休闲（如背心、拖鞋）</div>
+        </div>
+        <div class="dress-card">
+          <div class="dress-icon">🏃</div>
+          <div class="dress-label">Day4 团建</div>
+          <div class="dress-desc">运动装束为佳，骑行/徒步需穿运动鞋，避免裙装</div>
+        </div>
+        <div class="dress-card">
+          <div class="dress-icon">🎊</div>
+          <div class="dress-label">Day3 庆功晚宴</div>
+          <div class="dress-desc">可适当正式，建议展现个人风格，鼓励稍作打扮</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 会议纪律 & 行为准则 -->
+    <div class="card">
+      <div class="card-h">📋 会议纪律 & 行为准则</div>
+      <ul class="ck">
+        <li>请提前5分钟入场，会议期间请将手机调至静音</li>
+        <li>讨论环节积极参与，鼓励开放表达，所有发言受到尊重</li>
+        <li>世界咖啡讨论内容不对外传播（"拉斯维加斯原则"）</li>
+        <li>90天承诺将在会后整理发布，请认真对待</li>
+        <li>照片/记录素材如需对外分享，请经团队确认</li>
+        <li>尊重酒店设施和自然环境，不在非指定区域吸烟</li>
+      </ul>
+    </div>
+
+    <!-- 健康 & 安全 -->
+    <div class="card">
+      <div class="card-h">🏥 健康 & 安全</div>
+      <ul class="ck">
+        <li>如有特殊饮食需求（素食、过敏等），请提前告知余琪</li>
+        <li>如有健康状况或行动不便，请提前说明，活动安排可灵活调整</li>
+        <li>团建活动（骑行/徒步）量力而行，有备选轻松方案</li>
+        <li>建议随身携带个人常用药品</li>
+        <li>山区驾车请注意山路安全，建议夜间减少单独外出</li>
+      </ul>
+      <div class="notice notice-orange" style="margin-top:14px">
+        🚑 <strong>附近医院：</strong>德清县人民医院（车程约30分钟）· 如有紧急情况请第一时间联系余琪
+      </div>
+    </div>
+
+    <!-- 费用 & 报销 -->
+    <div class="card">
+      <div class="card-h">💰 费用说明 & 报销</div>
+      <table class="tbl">
+        <thead><tr><th>费用类型</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>住宿费用</td><td>公司统一承担，无需个人垫付</td></tr>
+          <tr><td>会议餐饮</td><td>全程会议餐饮公司统一安排，无需个人支付</td></tr>
+          <tr><td>往返交通</td><td>公司报销，请保留火车票/机票凭证，回京后按正常流程报销</td></tr>
+          <tr><td>个人消费</td><td>酒店minibar、个人购物等个人消费自理</td></tr>
+          <tr><td>报销截止</td><td>返京后<strong>5个工作日内</strong>提交报销，逾期可能影响当月结算</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Wi-Fi & 设备 -->
+    <div class="card">
+      <div class="card-h">📶 Wi-Fi & 设备</div>
+      <div class="ni-card" style="margin-bottom:14px">
+        <div class="ni-icon" style="background:#d1fae5">📶</div>
+        <div class="ni-body">
+          <div class="ni-title">酒店 Wi-Fi</div>
+          <div class="ni-val">网络名称：裸心谷Guest（以实际为准）</div>
+          <div class="ni-sub">密码入住时前台告知。山区信号有限，建议提前下载好会议相关材料。</div>
+        </div>
+      </div>
+      <ul class="ck">
+        <li>述职PPT请提前下载至本地，避免依赖网络播放</li>
+        <li>会议室配备投影/大屏，支持 HDMI & AirPlay</li>
+        <li>请携带自己的笔记本电脑和充电设备</li>
+      </ul>
+    </div>
+
+    <!-- 紧急联系人 -->
+    <div class="card">
+      <div class="card-h">📞 紧急联系人</div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-av">💼</div>
+          <div class="contact-body">
+            <div class="contact-name">余琪</div>
+            <div class="contact-role">采购部 HRBP · 本次活动统筹</div>
+            <div class="contact-note">交通接送 / 住宿问题 / 费用报销 / 应急协调</div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-av">🏨</div>
+          <div class="contact-body">
+            <div class="contact-name">裸心谷前台</div>
+            <div class="contact-role">酒店 24h 服务</div>
+            <div class="contact-note">房间问题 / 设施报修 / 餐饮预约</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 行前检查清单 -->
+    <div class="card">
+      <div class="card-h">🎒 行前检查清单</div>
+      <div class="checklist-cols">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--g500);margin-bottom:8px;letter-spacing:.05em">📄 证件 & 材料</div>
+          <ul class="ck">
+            <li>身份证（入住必须）</li>
+            <li>火车票 / 机票（报销留存）</li>
+            <li>个人电脑 + 充电器</li>
+            <li>提前下载好述职/讨论材料</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--g500);margin-bottom:8px;letter-spacing:.05em">👕 衣物 & 装备</div>
+          <ul class="ck">
+            <li>会议日商务休闲装（3套）</li>
+            <li>运动装备 + 运动鞋（Day4）</li>
+            <li>薄外套 / 防晒衣（山区早晚凉）</li>
+            <li>防晒霜 + 太阳镜（户外活动）</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--g500);margin-bottom:8px;letter-spacing:.05em">💊 日常用品</div>
+          <ul class="ck">
+            <li>个人洗漱用品（偏好品牌）</li>
+            <li>常用药品（肠胃药、感冒药等）</li>
+            <li>充电宝 + 数据线</li>
+            <li>现金少量（山区部分场所不支持电子支付）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════
+  全员：参会人员 & 分组
+════════════════════════════ -->
+<div id="pg-staff-people" class="page">
+  <nav class="topbar">
+    <div class="topbar-in">
+      <div class="tb-left">
+        <div class="tb-logo">👥</div>
+        <span class="tb-title">参会人员 & 分组</span>
+        <span class="tb-chip tb-chip-s">✅ 全员</span>
+      </div>
+      <div class="tb-right">
+        <button class="btn-home" onclick="go('pg-landing')">← 返回首页</button>
+      </div>
+    </div>
+  </nav>
+  <div class="content-wrap">
+
+    <div class="hero" style="background:linear-gradient(135deg,#4f46e5,#3730a3)">
+      <div class="hero-icon">👥</div>
+      <div class="hero-body">
+        <div class="hero-title">参会人员 & 世界咖啡分组</div>
+        <div class="hero-metas">
+          <span class="hero-meta">👔 强哥+主管6人（全程）</span>
+          <span class="hero-meta">⭐ 骨干6人（Day2下午起）</span>
+          <span class="hero-meta">💼 HR 2人（观察员）</span>
+          <span class="hero-meta">☕ 3组世界咖啡</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-n">14</div><div class="stat-l">参会总人数</div></div>
+      <div class="stat"><div class="stat-n">6</div><div class="stat-l">主管（全程）</div></div>
+      <div class="stat"><div class="stat-n">6</div><div class="stat-l">骨干（Day2起）</div></div>
+      <div class="stat"><div class="stat-n">2</div><div class="stat-l">HR观察员</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">👑 强哥 + 主管（全程参加，Day1起）</div>
+      <div class="people-grid">
+        <div class="person"><div class="p-av av-m">👑</div><div><div class="p-name">谭万强</div><div class="p-role">采购部负责人（观察员）</div></div></div>
+        <div class="person"><div class="p-av av-m">👔</div><div><div class="p-name">郎咸志</div><div class="p-role">IDC采购中心主管</div></div></div>
+        <div class="person"><div class="p-av av-m">👔</div><div><div class="p-name">柴博福</div><div class="p-role">运营IT采购中心主管</div></div></div>
+        <div class="person"><div class="p-av av-m">👔</div><div><div class="p-name">周程</div><div class="p-role">市场采购中心主管</div></div></div>
+        <div class="person"><div class="p-av av-m">👔</div><div><div class="p-name">孙爽</div><div class="p-role">服务采购中心主管</div></div></div>
+        <div class="person"><div class="p-av av-m">👔</div><div><div class="p-name">邹赫</div><div class="p-role">后勤采购中心/平台组主管</div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">⭐ 骨干（Day2 下午起参加）</div>
+      <div class="people-grid">
+        <div class="person"><div class="p-av av-s">⭐</div><div><div class="p-name">于蕊</div><div class="p-role">后勤采购中心</div></div></div>
+        <div class="person"><div class="p-av av-s">⭐</div><div><div class="p-name">梁佳阳</div><div class="p-role">IDC采购中心</div></div></div>
+        <div class="person"><div class="p-av av-s">⭐</div><div><div class="p-name">阎梦</div><div class="p-role">平台组</div></div></div>
+        <div class="person"><div class="p-av av-s">⭐</div><div><div class="p-name">张昊楠</div><div class="p-role">运营IT采购中心</div></div></div>
+        <div class="person"><div class="p-av av-s">⭐</div><div><div class="p-name">赵元泽</div><div class="p-role">后勤采购中心</div></div></div>
+        <div class="person"><div class="p-av av-s">⭐</div><div><div class="p-name">李玉辉</div><div class="p-role">市场采购中心</div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">💼 HR（全程观察员，协调会务）</div>
+      <div class="people-grid">
+        <div class="person"><div class="p-av" style="background:#f0fdf4">💼</div><div><div class="p-name">黄赛锋</div><div class="p-role">采购部 HRBP · 观察员</div></div></div>
+        <div class="person"><div class="p-av" style="background:#f0fdf4">💼</div><div><div class="p-name">余琪</div><div class="p-role">采购部 HRBP · 会务统筹</div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">☕ Day3 世界咖啡 · 分组安排</div>
+      <p style="font-size:13px;color:var(--g500);margin-bottom:18px;line-height:1.7">
+        7月4日（Day3）下午 13:30—16:30，采购通道职级标准升级世界咖啡分组讨论。<br>
+        <strong>谭万强 + 黄赛锋</strong>作为观察员，针对卡点问题进行指导。
+      </p>
+      <div class="table-grid">
+        <div class="table-card">
+          <div class="tc-title">第一组 <span class="tc-badge t-blue">通用力</span></div>
+          <div class="tc-mem">
+            <div class="tc-mem-item"><span class="star">★</span> 郎咸志（组长）</div>
+            <div class="tc-mem-item">阎梦</div>
+            <div class="tc-mem-item">于蕊</div>
+            <div class="tc-mem-item">张昊楠</div>
+          </div>
+          <div class="tc-focus">
+            <div class="tc-focus-label">焦点问题</div>
+            AI工具能力应加在通用力维度哪个位置？各职级AI能力如何分层区分？
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="tc-title">第二组 <span class="tc-badge t-purple">业绩战功</span></div>
+          <div class="tc-mem">
+            <div class="tc-mem-item"><span class="star">★</span> 邹赫（组长）</div>
+            <div class="tc-mem-item">周程</div>
+            <div class="tc-mem-item">梁佳阳</div>
+            <div class="tc-mem-item">余琪</div>
+          </div>
+          <div class="tc-focus">
+            <div class="tc-focus-label">焦点问题</div>
+            业绩战功维度如何纳入AI贡献？AI辅助决策下如何衡量个人战功？
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="tc-title">第三组 <span class="tc-badge t-green">专业力</span></div>
+          <div class="tc-mem">
+            <div class="tc-mem-item"><span class="star">★</span> 柴博福（组长）</div>
+            <div class="tc-mem-item">孙爽</div>
+            <div class="tc-mem-item">赵元泽</div>
+            <div class="tc-mem-item">李玉辉</div>
+          </div>
+          <div class="tc-focus">
+            <div class="tc-focus-label">焦点问题</div>
+            AI对采购专业力改变了什么？品类策略中AI与人工的分工线在哪？
+          </div>
+        </div>
+      </div>
+      <div class="notice notice-blue" style="margin-top:4px">
+        💡 <strong>换桌规则：</strong>每轮约60min，组长留守，其余成员换桌，将上轮成果带入新桌深化；三轮后各组长汇总，最终大汇谈共识确认。
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════
+  内容页占位（后续步骤填充）
+════════════════════════════ -->
+<div id="pg-manager-agenda" class="page">
+  <nav class="topbar">
+    <div class="topbar-in">
+      <div class="tb-left">
+        <div class="tb-logo">📋</div>
+        <span class="tb-title">完整议程</span>
+        <span class="tb-chip tb-chip-m">👔 主管</span>
+      </div>
+      <div class="tb-right">
+        <button class="btn-home" onclick="go('pg-manager-home')">← 返回主页</button>
+      </div>
+    </div>
+  </nav>
+  <div class="content-wrap">
+
+    <div class="hero" style="background:linear-gradient(135deg,#1a56db,#1e40af)">
+      <div class="hero-icon">🏔️</div>
+      <div class="hero-body">
+        <div class="hero-title">采购部 2026 H1 述职会+务虚会<br>完整议程（主管版）</div>
+        <div class="hero-metas">
+          <span class="hero-meta">🗓️ 7月2日—5日（4天3晚）</span>
+          <span class="hero-meta">📍 浙江·莫干山·裸心谷</span>
+          <span class="hero-meta">👥 主管6人 + 骨干6人 + HR 2人</span>
+          <span class="hero-meta">🚀 每天10:00开始</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-n">4</div><div class="stat-l">天</div></div>
+      <div class="stat"><div class="stat-n">12</div><div class="stat-l">参会人数</div></div>
+      <div class="stat"><div class="stat-n">5</div><div class="stat-l">述职场次</div></div>
+      <div class="stat"><div class="stat-n">2</div><div class="stat-l">AI议题</div></div>
+      <div class="stat"><div class="stat-n">1</div><div class="stat-l">世界咖啡</div></div>
+    </div>
+
+
+
+    <!-- 出行安排 主管版 -->
+    <div class="card">
+      <div class="card-h">🚄 出行安排</div>
+      <div class="tl">
+        <div class="tl-item">
+          <div class="tl-time">7月1日</div>
+          <div class="tl-dot d-blue"></div>
+          <div class="tl-body">
+            <div class="tl-title">🚗 主管出发</div>
+            <div class="tl-note">主管团队从北京出发，16:00-21:13 抵达德清，驾车接送至裸心谷，办理入住</div>
+            <span class="who who-m">主管</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">7月3日上午</div>
+          <div class="tl-dot d-green"></div>
+          <div class="tl-body">
+            <div class="tl-title">🚄 骨干出发</div>
+            <div class="tl-note">骨干6人乘高铁 G815（北京南 07:04 → 德清 12:47），统一安排接送至裸心谷，午餐时汇合</div>
+            <span class="who who-a">✅ 骨干</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">7月5日</div>
+          <div class="tl-dot d-orange"></div>
+          <div class="tl-body">
+            <div class="tl-title">🚄 统一返程</div>
+            <div class="tl-note">团建结束后驾车送德清站，乘 G876（15:35 德清 → 21:23 北京南）返京</div>
+            <span class="who who-a">✅ 全员</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card open" data-d="1">
+      <div class="day-hd" onclick="toggleDay(this)">
+        <div class="day-num"><span class="d">Day</span><span class="n">1</span></div>
+        <div class="day-tw"><div class="day-title">主管述职 + 晚宴破冰</div><div class="day-date">7月2日（周四）</div><div class="day-tags"><span class="tag t-blue">🎤 H1述职</span><span class="tag t-orange">🍻 破冰晚宴</span><span class="tag t-gray">👔 主管专场</span></div></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-bd"><div class="tl">
+        <div class="tl-item"><div class="tl-time">10:00-10:10</div><div class="tl-dot d-blue"></div><div class="tl-body"><div class="tl-title">开场致辞</div><span class="who who-m">主管</span></div></div>
+        <div class="tl-item"><div class="tl-time">10:10-11:10</div><div class="tl-dot d-blue"></div><div class="tl-body"><div class="tl-title">H1述职① · 郎咸志 — IDC采购中心</div><div class="tl-note">自述≤35min + Q&amp;A≤25min</div><span class="who who-m">主管</span></div></div>
+        <div class="tl-item"><div class="tl-time">11:10-12:10</div><div class="tl-dot d-blue"></div><div class="tl-body"><div class="tl-title">H1述职② · 柴博福 — 运营IT采购中心</div><div class="tl-note">自述≤35min + Q&amp;A≤25min</div><span class="who who-m">主管</span></div></div>
+        <div class="tl-item"><div class="tl-time">12:10-13:30</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🍽️ 午餐</div><div class="tl-note">莫干山土菜 · 清研莫干 / 御香农家菜</div><span class="who who-m">主管</span></div></div>
+        <div class="tl-item"><div class="tl-time">13:30-14:30</div><div class="tl-dot d-blue"></div><div class="tl-body"><div class="tl-title">H1述职③ · 周程 — 市场采购中心</div><div class="tl-note">自述≤35min + Q&amp;A≤25min</div><span class="who who-m">主管</span></div></div>
+        <div class="tl-item"><div class="tl-time">14:30-15:30</div><div class="tl-dot d-blue"></div><div class="tl-body"><div class="tl-title">H1述职④ · 孙爽 — 服务采购中心</div><div class="tl-note">自述≤35min + Q&amp;A≤25min</div><span class="who who-m">主管</span></div></div>
+        <div class="tl-item"><div class="tl-time">15:30-15:45</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">☕ 茶歇</div><span class="who who-m">主管</span></div></div>
+        <div class="tl-item"><div class="tl-time">15:45-16:45</div><div class="tl-dot d-blue"></div><div class="tl-body"><div class="tl-title">H1述职⑤ · 邹赫 — 后勤采购中心</div><div class="tl-note">自述≤35min + Q&amp;A≤25min</div><span class="who who-m">主管</span></div></div>
+        <div class="tl-item"><div class="tl-time">16:45-17:30</div><div class="tl-dot d-purple"></div><div class="tl-body"><div class="tl-title">述职小结 · 集体复盘</div><div class="tl-note">提炼共性问题与跨中心协作机会</div><span class="who who-m">主管</span></div></div>
+        <div class="tl-item"><div class="tl-time">18:00-20:30</div><div class="tl-dot d-orange"></div><div class="tl-body"><div class="tl-title">🍽️ 给新主管建议 + 晚餐</div><div class="tl-note">竹林宴 / 户外烧烤，喝酒聊天</div><span class="who who-m">主管</span></div></div>
+        <div class="tl-item"><div class="tl-time">20:30后</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🀄 掼蛋 / 自由放松</div><span class="who who-m">主管</span></div></div>
+      </div></div>
+    </div>
+
+    <div class="day-card" data-d="2">
+      <div class="day-hd" onclick="toggleDay(this)">
+        <div class="day-num"><span class="d">Day</span><span class="n">2</span></div>
+        <div class="day-tw"><div class="day-title">上午主管·AI计划 → 下午全员·AI讨论</div><div class="day-date">7月3日（周五）</div><div class="day-tags"><span class="tag t-blue">🤖 AI全员化</span><span class="tag t-green">🌍 全员合流（15:00起）</span></div></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-bd"><div class="tl">
+        <div class="tl-item"><div class="tl-time">10:00-11:00</div><div class="tl-dot d-purple"></div><div class="tl-body"><div class="tl-title">讨论「采购部AI能力提升计划」</div><div class="tl-note">至少定义2—3个AI优先应用场景（下个月就能开始的）；明确学习机制：每月一次AI应用分享</div><span class="who who-m">主管</span></div></div>
+        <div class="tl-item"><div class="tl-time">11:00-12:00</div><div class="tl-dot d-blue"></div><div class="tl-body"><div class="tl-title">讨论「采购通道标准升级方向」</div><div class="tl-note">定方向，为Day3带领骨干成员一起讨论做铺垫</div><span class="who who-m">主管</span></div></div>
+        <div class="tl-item"><div class="tl-time">12:00-15:00</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🍽️ 午餐 + 骨干成员抵达汇合</div><div class="tl-note">骨干乘 G815（北京南07:04→德清12:47），统一接送至裸心谷</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">15:00-15:20</div><div class="tl-dot d-blue"></div><div class="tl-body"><div class="tl-title">AI讨论·第一层：AI个人实验分享</div><div class="tl-note">组内破冰，每人分享1个AI工具使用案例（组内10min讨论+10min分享）</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">15:20-16:30</div><div class="tl-dot d-blue"></div><div class="tl-body"><div class="tl-title">AI讨论·第二层：AI对采购的影响</div><div class="tl-note">结合采购业务特性，如何用AI提效/创新？如何推进？</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">16:30-17:00</div><div class="tl-dot d-green"></div><div class="tl-body"><div class="tl-title">各组汇报 + 总结</div><div class="tl-note">汇总结果，整理成材料发全员</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">17:00-18:30</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🏃 自由活动放松</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">18:30-20:00</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🍽️ 晚餐（早点休息，为Day3养精神）</div><span class="who who-a">✅ 全员</span></div></div>
+      </div></div>
+    </div>
+
+    <div class="day-card" data-d="3">
+      <div class="day-hd" onclick="toggleDay(this)">
+        <div class="day-num"><span class="d">Day</span><span class="n">3</span></div>
+        <div class="day-tw"><div class="day-title">职级标准升级讨论 + 晚宴嗨</div><div class="day-date">7月4日（周六）</div><div class="day-tags"><span class="tag t-purple">🏅 职级标准升级</span><span class="tag t-cyan">☕ 世界咖啡</span><span class="tag t-orange">🎊 晚宴嗨</span></div></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-bd"><div class="tl">
+        <div class="tl-item"><div class="tl-time">09:00-12:00</div><div class="tl-dot d-purple"></div><div class="tl-body"><div class="tl-title">采购通道职级标准升级（上）</div><div class="tl-note">讨论升级方向（必含AI）、逐条修改讨论、明确V3修订时间表（谁负责、初稿时间、试用时间）</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">12:00-13:30</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🍽️ 午餐 + 休息</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">13:30-16:30</div><div class="tl-dot d-purple"></div><div class="tl-body"><div class="tl-title">采购通道职级标准升级（下）· 世界咖啡分组</div><div class="tl-note">分3组世界咖啡模式输出结果；三轮换桌后各组长汇总，大汇谈共识确认</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">16:30-19:00</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🌇 欣赏夕阳 / 自由放松</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">19:00-21:30</div><div class="tl-dot d-orange"></div><div class="tl-body"><div class="tl-title">🎊 晚宴一起嗨 + 主管与骨干轻松夜话</div><span class="who who-a">✅ 全员</span></div></div>
+      </div></div>
+    </div>
+
+    <div class="day-card" data-d="4">
+      <div class="day-hd" onclick="toggleDay(this)">
+        <div class="day-num"><span class="d">Day</span><span class="n">4</span></div>
+        <div class="day-tw"><div class="day-title">团建放松 + G876返程</div><div class="day-date">7月5日（周日）</div><div class="day-tags"><span class="tag t-orange">🚴 骑行+徒步</span><span class="tag t-green">🏊 自由放松</span><span class="tag t-gray">🚄 G876 15:35返程</span></div></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-bd"><div class="tl">
+        <div class="tl-item"><div class="tl-time">10:00-13:00</div><div class="tl-dot d-orange"></div><div class="tl-body"><div class="tl-title">🚴 莫干山骑行 + 竹林徒步 + 茶歇</div><div class="tl-note">裸心谷骑行2h → 竹林徒步1h → 终点茶歇，体力门槛低</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">13:00-14:30</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🍽️ 压轴午餐（最丰盛）</div><div class="tl-note">义远农场 / 西竹云见 · 莫干山特色全宴</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">14:30-16:00</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🏊 自由放松</div><div class="tl-note">泳池 / 温泉 / 山间漫步 / 掼蛋</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">15:30起</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🚄 返程</div><div class="tl-note">驾车送德清站，乘 G876（德清 15:35 → 北京南 21:23）返京</div><span class="who who-a">✅ 全员</span></div></div>
+      </div></div>
+    </div>
+
+  </div>
+</div>
+<div id="pg-manager-prep" class="page">
+  <nav class="topbar">
+    <div class="topbar-in">
+      <div class="tb-left">
+        <div class="tb-logo">✅</div>
+        <span class="tb-title">会前准备</span>
+        <span class="tb-chip tb-chip-m">👔 主管</span>
+      </div>
+      <div class="tb-right">
+        <button class="btn-home" onclick="go('pg-manager-home')">← 返回主页</button>
+      </div>
+    </div>
+  </nav>
+  <div class="content-wrap">
+
+    <div class="hero" style="background:linear-gradient(135deg,#7c3aed,#5b21b6)">
+      <div class="hero-icon">✅</div>
+      <div class="hero-body">
+        <div class="hero-title">会前准备清单（主管版）</div>
+        <div class="hero-metas">
+          <span class="hero-meta">🗓️ 截止日期：6月30日</span>
+          <span class="hero-meta">👥 全体主管 + HR 必看</span>
+          <span class="hero-meta">⚠️ 含主管专项任务</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prep-card open">
+      <div class="prep-hd" onclick="togglePrep(this)">
+        <div class="prep-ico ico-blue">🤖</div>
+        <div class="prep-tw"><div class="prep-title">任务1：AI工具实操实验（全员必做，核心任务）</div><div class="prep-sub">务虚会前用AI完成一个日常工作具体任务 · 截止6月30日</div></div>
+        <span class="prep-chev">▼</span>
+      </div>
+      <div class="prep-bd">
+        <p style="font-size:13px;color:var(--g600);margin-bottom:14px;line-height:1.7">请各自用AI工具完成一个日常工作中的具体任务，并按下方模板整理记录。<strong>现场抽签分享</strong>，被抽中者每人10分钟分享。</p>
+        <table class="tbl">
+          <thead><tr><th>记录项目</th><th>填写要求</th></tr></thead>
+          <tbody>
+            <tr><td>使用的AI工具</td><td>如：ChatGPT / Claude / Kimi / 公司内部Agent / 其他</td></tr>
+            <tr><td>完成的具体任务</td><td>如：IDC租赁成本分析 / 带宽品类比价 / 合同条款比对等</td></tr>
+            <tr><td>AI输出质量评估</td><td>优秀 / 良好 / 一般 / 较差，并简述原因</td></tr>
+            <tr><td>AI做得好的部分</td><td>具体描述优势</td></tr>
+            <tr><td>AI做得差的部分</td><td>具体描述不足</td></tr>
+            <tr><td>总体判断</td><td>替代（AI可独立完成）/ 辅助（AI帮忙但需人工把关）/ 目前不行</td></tr>
+            <tr><td>如果再做一次，会怎么调整</td><td>反思与改进方向</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="prep-card">
+      <div class="prep-hd" onclick="togglePrep(this)">
+        <div class="prep-ico ico-purple">📊</div>
+        <div class="prep-tw"><div class="prep-title">任务2：回顾本中心AI使用现状（主管专项）</div><div class="prep-sub">梳理本中心当前AI工具使用情况，供Day2/3讨论 · 截止6月30日</div></div>
+        <span class="prep-chev">▼</span>
+      </div>
+      <div class="prep-bd">
+        <p style="font-size:13px;color:var(--g600);margin-bottom:14px;line-height:1.7">请各位主管梳理：本中心目前已在AI领域做了哪些尝试、用了哪些工具、效果如何。</p>
+        <table class="tbl">
+          <thead><tr><th>梳理维度</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>目前在用的AI工具/能力</td><td>列出具体工具名称和使用场景</td></tr>
+            <tr><td>已取得的成效</td><td>效率提升、成本节省、质量改善等</td></tr>
+            <tr><td>遇到的问题/挑战</td><td>工具局限、团队接受度、数据安全等</td></tr>
+            <tr><td>下一步计划</td><td>想推进但还没启动的AI应用方向</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="prep-card">
+      <div class="prep-hd" onclick="togglePrep(this)">
+        <div class="prep-ico ico-green">🎤</div>
+        <div class="prep-tw"><div class="prep-title">任务3：准备H1述职材料（各中心主管）</div><div class="prep-sub">述职PPT文档链接于述职前2个工作日提交 · 截止6月15日</div></div>
+        <span class="prep-chev">▼</span>
+      </div>
+      <div class="prep-bd">
+        <div style="font-size:13px;font-weight:700;color:var(--g700);margin-bottom:10px">述职内容要求</div>
+        <ul class="ck" style="margin-bottom:16px">
+          <li>H1核心指标完成情况（数据对比、趋势分析）</li>
+          <li>关键项目进展与价值贡献（区分主管贡献与团队贡献）</li>
+          <li>团队变化与人才培养情况</li>
+          <li>下半年重点方向与挑战</li>
+        </ul>
+        <div style="font-size:13px;font-weight:700;color:var(--g700);margin-bottom:10px">述职顺序与时长</div>
+        <table class="tbl">
+          <thead><tr><th>顺序</th><th>述职人</th><th>中心</th><th>自述</th><th>Q&amp;A</th></tr></thead>
+          <tbody>
+            <tr><td>①</td><td>郎咸志</td><td>IDC采购中心</td><td>≤35min</td><td>≤25min</td></tr>
+            <tr><td>②</td><td>柴博福</td><td>运营IT采购中心</td><td>≤35min</td><td>≤25min</td></tr>
+            <tr><td>③</td><td>周程</td><td>市场采购中心</td><td>≤35min</td><td>≤25min</td></tr>
+            <tr><td>④</td><td>孙爽</td><td>服务采购中心</td><td>≤35min</td><td>≤25min</td></tr>
+            <tr><td>⑤</td><td>邹赫</td><td>后勤采购中心</td><td>≤35min</td><td>≤25min</td></tr>
+          </tbody>
+        </table>
+        <div class="notice notice-blue" style="margin-top:14px">💬 Q&amp;A 建议方向：① 听完TA的述职，你有什么收获？② 如果你是TA，你会怎么做？</div>
+      </div>
+    </div>
+
+    <div class="prep-card">
+      <div class="prep-hd" onclick="togglePrep(this)">
+        <div class="prep-ico ico-orange">📖</div>
+        <div class="prep-tw"><div class="prep-title">任务4：预读职级标准V2讨论底稿</div><div class="prep-sub">6月20日前发送，请提前阅读并带想法来 · 截止6月25日</div></div>
+        <span class="prep-chev">▼</span>
+      </div>
+      <div class="prep-bd">
+        <p style="font-size:13px;color:var(--g600);margin-bottom:14px;line-height:1.7">职级标准V2将于6月20日前发送全员，请提前阅读，带想法参加Day2下午的世界咖啡讨论。</p>
+        <ul class="ck">
+          <li>现有5维度×7职级结构：业绩战功、专业力、通用力、认知水平、团队管理</li>
+          <li>各维度中AI能力目前的缺失</li>
+          <li>你认为AI应该加在哪个维度、哪个职级层次</li>
+          <li>你所在品类/中心，AI改变了哪些能力要求</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:24px">
+      <div class="card-h">📅 筹备时间线</div>
+      <div class="ptl">
+        <div class="ptl-item"><div class="ptl-dot ptl-done"></div><div class="ptl-date">5月27日</div><div class="ptl-task">✅ 方案确认，开始联系酒店</div></div>
+        <div class="ptl-item"><div class="ptl-dot ptl-hot"></div><div class="ptl-date">5月30日前</div><div class="ptl-task">⚠️ 确认酒店与场地（裸心谷 / 裸心堡）</div></div>
+        <div class="ptl-item"><div class="ptl-dot ptl-todo"></div><div class="ptl-date">6月5日前</div><div class="ptl-task">确认全员名单，发送正式通知</div></div>
+        <div class="ptl-item"><div class="ptl-dot ptl-todo"></div><div class="ptl-date">6月15日前</div><div class="ptl-task">收集各中心述职PPT文档链接</div></div>
+        <div class="ptl-item"><div class="ptl-dot ptl-todo"></div><div class="ptl-date">6月20日前</div><div class="ptl-task">职级标准V2讨论底稿发全员预读</div></div>
+        <div class="ptl-item"><div class="ptl-dot ptl-todo"></div><div class="ptl-date">6月25日前</div><div class="ptl-task">确认交通方案，预订高铁 / 机票</div></div>
+        <div class="ptl-item"><div class="ptl-dot ptl-todo"></div><div class="ptl-date">6月28日前</div><div class="ptl-task">最终议程确认，物料准备（桌布、马克笔、汇谈石、茶点等）</div></div>
+        <div class="ptl-item"><div class="ptl-dot ptl-todo"></div><div class="ptl-date">6月30日前</div><div class="ptl-task">各人完成AI实验并记录结果</div></div>
+        <div class="ptl-item"><div class="ptl-dot ptl-todo"></div><div class="ptl-date">7月1日</div><div class="ptl-task">出发前最终确认；主管根及 HR 从北京出发，16:00-21:13 抗达德清</div></div>
+        <div class="ptl-item"><div class="ptl-dot ptl-todo"></div><div class="ptl-date">7月3日</div><div class="ptl-task">6位骨干乘 G815（北京南 07:04 → 德清 12:47），午餐时汇合</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">🧰 世界咖啡物资清单</div>
+      <ul class="ck">
+        <li>每桌铺设桌布 / 海报纸，方便成员将重要观念写下或画下</li>
+        <li>每桌备好马克笔 / 彩色笔若干</li>
+        <li>每桌备1个"汇谈石"（任意小物件），发言者持有，其他人专注聆听</li>
+        <li>备好安吉白茶 / 咖啡和小点心，营造咖啡馆氛围</li>
+        <li>三轮结束后各桌海报纸保留，贴在墙上做「桌布之旅」</li>
+        <li>投影仪 / 屏幕（用于述职PPT展示）</li>
+        <li>签到表 + 名牌</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+<div id="pg-staff-agenda" class="page">
+  <nav class="topbar">
+    <div class="topbar-in">
+      <div class="tb-left">
+        <div class="tb-logo">📋</div>
+        <span class="tb-title">议程总览</span>
+        <span class="tb-chip tb-chip-s">✅ 全员</span>
+      </div>
+      <div class="tb-right">
+        <button class="btn-home" onclick="go('pg-staff-home')">← 返回主页</button>
+      </div>
+    </div>
+  </nav>
+  <div class="content-wrap">
+
+    <div class="hero" style="background:linear-gradient(135deg,#059669,#047857)">
+      <div class="hero-icon">🌿</div>
+      <div class="hero-body">
+        <div class="hero-title">采购部 2026 H1 务虚会<br>全员议程总览</div>
+        <div class="hero-metas">
+          <span class="hero-meta">🗓️ 7月3日—5日（3天）</span>
+          <span class="hero-meta">📍 浙江·莫干山·裸心谷</span>
+          <span class="hero-meta">🚄 G815抵达，G876返京</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 出行安排 非主管版 -->
+    <div class="card">
+      <div class="card-h">🚄 出行安排</div>
+      <div class="tl">
+        <div class="tl-item">
+          <div class="tl-time">7月3日上午</div>
+          <div class="tl-dot d-green"></div>
+          <div class="tl-body">
+            <div class="tl-title">🚄 出发：乘 G815 前往德清</div>
+            <div class="tl-note">北京南 07:04 发车 → 德清 12:47 抵达，统一安排接送至裸心谷</div>
+            <span class="who who-a">✅ 非主管</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">7月3日下午</div>
+          <div class="tl-dot d-blue"></div>
+          <div class="tl-body">
+            <div class="tl-title">🏨 抵达裸心谷 · 入住就餐</div>
+            <div class="tl-note">午餐与主管升汇合，14:00 办理入住 + 休整，15:00 正式开始全员议程</div>
+            <span class="who who-a">✅ 非主管</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">7月5日</div>
+          <div class="tl-dot d-orange"></div>
+          <div class="tl-body">
+            <div class="tl-title">🚄 返程：乘 G876 返京</div>
+            <div class="tl-note">团建结束后驾车送德清站，15:35 德清 → 21:23 北京南</div>
+            <span class="who who-a">✅ 非主管</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice notice-blue">🚄 <strong>骨干抵达：</strong>乘 G815（北京南 07:04 → 德清 12:47），抵达后驾车接送至裸心谷，<strong>7月3日（周五）下午 15:00</strong> 正式参与全员议程。</div>
+
+    <!-- Day2 全员部分 -->
+    <div class="day-card open" data-d="2">
+      <div class="day-hd" onclick="toggleDay(this)">
+        <div class="day-num"><span class="d">Day</span><span class="n">1</span><div style="font-size:9px;color:inherit;opacity:.8;margin-top:1px">全员</div></div>
+        <div class="day-tw"><div class="day-title">抵达 · AI讨论</div><div class="day-date">7月3日（周五）下午起</div><div class="day-tags"><span class="tag t-green">🌍 全员汇合</span><span class="tag t-blue">🤖 AI三层讨论</span></div></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-bd"><div class="tl">
+        <div class="tl-item"><div class="tl-time">12:47抵达</div><div class="tl-dot d-green"></div><div class="tl-body"><div class="tl-title">🚄 德清站抵达 · 驾车接送裸心谷</div><div class="tl-note">G815 北京南07:04→德清12:47，下车后统一安排接送</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">14:00-15:00</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🛎️ 办理入住 + 午餐 + 休整</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">15:00-15:20</div><div class="tl-dot d-blue"></div><div class="tl-body"><div class="tl-title">💡 AI讨论·第一层：个人实验分享</div><div class="tl-note">每人分享1个AI工具使用案例（提前准备！），畅聊工具体感</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">15:20-16:30</div><div class="tl-dot d-blue"></div><div class="tl-body"><div class="tl-title">🤖 AI讨论·第二层：AI对采购的影响</div><div class="tl-note">结合采购业务特性，如何用AI提效/创新？如何推进落地？</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">16:30-17:00</div><div class="tl-dot d-green"></div><div class="tl-body"><div class="tl-title">📝 各组汇报 + 总结</div><div class="tl-note">汇总结果，整理成行动清单</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">17:00-18:30</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🏃 自由活动放松</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">18:30-20:00</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🍽️ 晚餐（早点休息，为Day2养精神）</div><span class="who who-a">✅ 全员</span></div></div>
+      </div></div>
+    </div>
+
+    <div class="day-card" data-d="3">
+      <div class="day-hd" onclick="toggleDay(this)">
+        <div class="day-num"><span class="d">Day</span><span class="n">2</span><div style="font-size:9px;color:inherit;opacity:.8;margin-top:1px">全员</div></div>
+        <div class="day-tw"><div class="day-title">职级标准升级讨论 + 晚宴嗨</div><div class="day-date">7月4日（周六）全天</div><div class="day-tags"><span class="tag t-purple">🏅 职级标准</span><span class="tag t-cyan">☕ 世界咖啡</span><span class="tag t-orange">🎊 晚宴嗨</span></div></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-bd"><div class="tl">
+        <div class="tl-item"><div class="tl-time">09:00-12:00</div><div class="tl-dot d-purple"></div><div class="tl-body"><div class="tl-title">📋 采购通道职级标准升级讨论（上）</div><div class="tl-note">升级方向（必含AI维度）、逐条讨论、明确V3修订时间表</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">12:00-13:30</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🍽️ 午餐 + 休息</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">13:30-16:30</div><div class="tl-dot d-purple"></div><div class="tl-body"><div class="tl-title">☕ 职级标准升级（下）· 世界咖啡分组</div><div class="tl-note">分3组，每组有组长带领，三轮换桌深化讨论，最终大汇谈确认共识</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">16:30-19:00</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🌇 欣赏夕阳 / 自由放松</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">19:00-21:30</div><div class="tl-dot d-orange"></div><div class="tl-body"><div class="tl-title">🎊 晚宴一起嗨 + 轻松夜话</div><span class="who who-a">✅ 全员</span></div></div>
+      </div></div>
+    </div>
+
+    <div class="day-card" data-d="4">
+      <div class="day-hd" onclick="toggleDay(this)">
+        <div class="day-num"><span class="d">Day</span><span class="n">3</span><div style="font-size:9px;color:inherit;opacity:.8;margin-top:1px">全员</div></div>
+        <div class="day-tw"><div class="day-title">团建放松 + 返程</div><div class="day-date">7月5日（周日）</div><div class="day-tags"><span class="tag t-orange">🚴 骑行徒步</span><span class="tag t-green">🏊 自由放松</span><span class="tag t-gray">🚄 G876 15:35返京</span></div></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-bd"><div class="tl">
+        <div class="tl-item"><div class="tl-time">10:00-13:00</div><div class="tl-dot d-orange"></div><div class="tl-body"><div class="tl-title">🚴 莫干山骑行 + 竹林徒步 + 茶歇</div><div class="tl-note">裸心谷骑行2h → 竹林徒步1h → 终点茶歇，体力门槛低，风景超好</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">13:00-14:30</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🍽️ 压轴午餐</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">14:30-15:30</div><div class="tl-dot d-gray"></div><div class="tl-body"><div class="tl-title">🏊 自由放松</div><div class="tl-note">泳池 / 温泉 / 山间漫步 / 掼蛋</div><span class="who who-a">✅ 全员</span></div></div>
+        <div class="tl-item"><div class="tl-time">15:30起</div><div class="tl-dot d-blue"></div><div class="tl-body"><div class="tl-title">🚄 返程</div><div class="tl-note">驾车送德清站，乘 G876（德清 15:35 → 北京南 21:23）</div><span class="who who-a">✅ 全员</span></div></div>
+      </div></div>
+    </div>
+
+  </div>
+</div>
+
+<div id="pg-staff-team" class="page">
+  <nav class="topbar">
+    <div class="topbar-in">
+      <div class="tb-left">
+        <div class="tb-logo">🎉</div>
+        <span class="tb-title">团建方案</span>
+        <span class="tb-chip tb-chip-s">✅ 全员</span>
+      </div>
+      <div class="tb-right">
+        <button class="btn-home" onclick="go('pg-staff-home')">← 返回主页</button>
+      </div>
+    </div>
+  </nav>
+  <div class="content-wrap">
+
+    <div class="hero" style="background:linear-gradient(135deg,#d97706,#b45309)">
+      <div class="hero-icon">🎉</div>
+      <div class="hero-body">
+        <div class="hero-title">Day 4 · 团建方案</div>
+        <div class="hero-metas">
+          <span class="hero-meta">📍 裸心谷及周边</span>
+          <span class="hero-meta">⏰ 10:00—16:00</span>
+          <span class="hero-meta">🗓️ 7月5日（周日）</span>
+          <span class="hero-meta">👥 全员12人</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-h">团建方案选择</div>
+    <p class="section-sub">以下三个方案，方案A为推荐首选</p>
+
+    <div class="tb-grid" style="margin-bottom:28px">
+      <div class="tb-card" data-p="A">
+        <div class="tb-head">🚴<span class="tb-rec">⭐ 推荐</span></div>
+        <div class="tb-body">
+          <div class="tb-title">方案A：莫干山骑行 + 竹林徒步</div>
+          <div class="tb-desc">裸心谷自带骑行路线与自行车租赁，2h骑行穿越茶园竹林；骑行后1h竹林徒步，终点设茶歇站。体力门槛低，风景极佳，适合全员参与。</div>
+          <div class="tb-tags"><span class="tag t-blue">🚴 骑行2h</span><span class="tag t-green">🏕️ 徒步1h</span><span class="tag t-orange">☕ 茶歇</span><span class="tag t-gray">体力门槛低</span></div>
+        </div>
+      </div>
+      <div class="tb-card" data-p="B">
+        <div class="tb-head">🎋</div>
+        <div class="tb-body">
+          <div class="tb-title">方案B：安吉竹博园 + 天荒坪</div>
+          <div class="tb-desc">安吉竹博园1h参观；再前往天荒坪水库景区，壮阔山水景观。适合喜欢文化游览的团队，车程约40min。</div>
+          <div class="tb-tags"><span class="tag t-green">🎋 竹博园1h</span><span class="tag t-blue">🏔️ 天荒坪</span><span class="tag t-gray">车程40min</span></div>
+        </div>
+      </div>
+      <div class="tb-card" data-p="C">
+        <div class="tb-head">🥾</div>
+        <div class="tb-body">
+          <div class="tb-title">方案C：莫干山古道徒步 + 庾村探访</div>
+          <div class="tb-desc">莫干山古道2-3h轻徒步，沿途竹海翠绿、溪流潺潺；后前往庾村探访民国风情建筑群，感受历史人文氛围。</div>
+          <div class="tb-tags"><span class="tag t-orange">🥾 古道徒步2-3h</span><span class="tag t-purple">🏛️ 庾村人文</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-h">📍 住宿推荐</div>
+    <p class="section-sub">建议优先选择裸心谷，一站式能力最匹配</p>
+    <div class="card" style="margin-bottom:28px">
+      <table class="tbl">
+        <thead><tr><th>酒店</th><th>特色</th><th>参考价格</th></tr></thead>
+        <tbody>
+          <tr><td><strong>裸心谷（推荐）</strong></td><td>莫干山最知名度假酒店，会议室+别墅+泳池+骑行+徒步一站式，121间别墅</td><td>约800-1200元/间/晚</td></tr>
+          <tr><td>裸心堡</td><td>城堡风格，更正式会议空间，Kikaboni西餐厅（高端）</td><td>约1000-1500元/间/晚</td></tr>
+          <tr><td>莫干山居图</td><td>中式庭院，餐饮精致</td><td>约600-900元/间/晚</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-h">🍽️ 4天餐饮安排</div>
+    <p class="section-sub">核心原则：吃得好大家才开心，4天不重复，每餐有特色</p>
+    <div class="meal-grid" style="margin-bottom:28px">
+      <div class="meal-card"><div class="meal-title">🌿 Day1午餐</div><div class="meal-desc">莫干山土菜：土鸡煲、笋干烧肉、山野菜<br><strong>推荐：</strong>清研莫干（庾村，人均80）</div></div>
+      <div class="meal-card"><div class="meal-title">🔥 Day1晚餐（破冰）</div><div class="meal-desc">竹林宴/户外烧烤：烤全羊/烤乳猪+啤酒<br><strong>推荐：</strong>裸心谷户外烧烤区</div></div>
+      <div class="meal-card"><div class="meal-title">🦆 Day2午餐（全员汇合）</div><div class="meal-desc">湖州风味：太湖三白、千张包、湖州酱鸭<br><strong>推荐：</strong>东大方传统菜（含包厢）</div></div>
+      <div class="meal-card"><div class="meal-title">🍲 Day2晚餐</div><div class="meal-desc">莫干山农家宴：老鸭煲、山笋红烧肉<br><strong>推荐：</strong>金鱼妈妈山野食趣</div></div>
+      <div class="meal-card"><div class="meal-title">🎋 Day3午餐</div><div class="meal-desc">安吉山珍：竹笋宴、白茶配餐<br><strong>推荐：</strong>阿露佳·舌尖上的安吉菜</div></div>
+      <div class="meal-card"><div class="meal-title">🎊 Day3晚餐（庆功宴）</div><div class="meal-desc">东海黄鱼、时令海鲜、本地特色<br><strong>推荐：</strong>裸心堡·裸心味</div></div>
+      <div class="meal-card"><div class="meal-title">👑 Day4午餐（压轴）</div><div class="meal-desc">莫干山特色大全，最丰盛的一餐<br><strong>推荐：</strong>义远农场 / 西竹云见（人均150-200）</div></div>
+      <div class="meal-card"><div class="meal-title">☕ 每日茶歇</div><div class="meal-desc">莫干山本地水果+安吉白茶/咖啡+手作糕点<br><strong>推荐：</strong>裸心谷酒店茶歇服务</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">🚄 交通安排</div>
+      <div class="ptl">
+        <div class="ptl-item"><div class="ptl-dot ptl-todo"></div><div class="ptl-date">7月1日</div><div class="ptl-task">主管团队从北京出发，16:00-21:13 抵达德清，驾车接送至裸心谷</div></div>
+        <div class="ptl-item"><div class="ptl-dot ptl-todo"></div><div class="ptl-date">7月3日上午</div><div class="ptl-task">骨干6人乘车 G815（北京南 07:04 → 德清 12:47），驾车接送至裸心谷，午餐时汇合</div></div>
+        <div class="ptl-item"><div class="ptl-dot ptl-todo"></div><div class="ptl-date">7月5日</div><div class="ptl-task">驾车送德清站，乘车 G876（15:35 → 北京南 21:23）返京</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════ 主管密码弹窗 ════ -->
+<div id="pwd-overlay" style="
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(15,23,42,.7);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center
+">
+  <div style="
+    background:#fff;border-radius:24px;padding:36px 32px 28px;
+    width:320px;max-width:90vw;box-shadow:0 32px 80px rgba(0,0,0,.3);
+    text-align:center
+  ">
+    <div style="font-size:40px;margin-bottom:12px">🔐</div>
+    <div style="font-size:18px;font-weight:800;color:#0f172a;margin-bottom:6px">主管专属区域</div>
+    <div style="font-size:13px;color:#64748b;margin-bottom:22px;line-height:1.6">
+      此区域仅限主管访问<br>请输入访问密码
+    </div>
+    <input id="pwd-input" type="password" placeholder="请输入密码"
+      style="
+        width:100%;box-sizing:border-box;
+        border:2px solid #e2e8f0;border-radius:12px;
+        padding:13px 16px;font-size:20px;outline:none;
+        transition:border-color .2s;text-align:center;letter-spacing:.3em
+      "
+      onkeydown="if(event.key==='Enter')checkPwd()"
+      oninput="document.getElementById('pwd-err').style.display='none'"
+      onfocus="this.style.borderColor='#3b82f6'"
+      onblur="this.style.borderColor='#e2e8f0'"
+    >
+    <div id="pwd-err" style="
+      display:none;color:#ef4444;font-size:12px;margin-top:8px;font-weight:600
+    ">❌ 密码错误，请重试</div>
+    <button onclick="checkPwd()" style="
+      width:100%;margin-top:16px;padding:13px;
+      background:linear-gradient(135deg,#1d4ed8,#1e40af);
+      color:#fff;font-size:15px;font-weight:700;
+      border:none;border-radius:12px;cursor:pointer;transition:opacity .2s
+    " onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+      进入 →
+    </button>
+    <div style="margin-top:12px">
+      <button onclick="closePwd()" style="
+        background:none;border:none;color:#94a3b8;font-size:13px;cursor:pointer;padding:4px 8px
+      ">取消</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function goHome(role){
+  go(role==='manager'?'pg-manager-home':'pg-staff-home');
+}
+function enterManager(){
+  const ov=document.getElementById('pwd-overlay');
+  ov.style.display='flex';
+  setTimeout(()=>document.getElementById('pwd-input').focus(),80);
+}
+function closePwd(){
+  document.getElementById('pwd-overlay').style.display='none';
+  document.getElementById('pwd-input').value='';
+  document.getElementById('pwd-err').style.display='none';
+}
+function checkPwd(){
+  const v=document.getElementById('pwd-input').value.trim();
+  if(v==='888'){
+    closePwd();
+    goHome('manager');
+  } else {
+    const err=document.getElementById('pwd-err');
+    err.style.display='block';
+    document.getElementById('pwd-input').value='';
+    document.getElementById('pwd-input').focus();
+  }
+}
+document.getElementById('pwd-overlay').addEventListener('click',function(e){
+  if(e.target===this) closePwd();
+});
+function toggleDay(el){el.closest('.day-card').classList.toggle('open')}
+function togglePrep(el){el.closest('.prep-card').classList.toggle('open')}
+</script>
+</body>
+</html>
