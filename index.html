@@ -767,10 +767,10 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
         <span class="land-pub-arrow">→</span>
       </div>
       <div class="land-pub-btn" onclick="go('pg-staff-team')">
-        <div class="land-pub-em" style="background:linear-gradient(135deg,#10b981,#059669)">🎉</div>
+        <div class="land-pub-em" style="background:linear-gradient(135deg,#10b981,#059669)">🏆</div>
         <div class="land-pub-body">
-          <div class="land-pub-title">团建方案</div>
-          <div class="land-pub-desc">Day4 骑行徒步 · 住宿推荐 · 餐饮安排</div>
+          <div class="land-pub-title">小组打分</div>
+          <div class="land-pub-desc">4组轮流分享 · 互评打分 · 实时结果</div>
         </div>
         <span class="land-pub-arrow">→</span>
       </div>
@@ -1957,8 +1957,8 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
   <nav class="topbar">
     <div class="topbar-in">
       <div class="tb-left">
-        <div class="tb-logo">🎉</div>
-        <span class="tb-title">团建方案</span>
+        <div class="tb-logo">🏆</div>
+        <span class="tb-title">小组打分</span>
         <span class="tb-chip tb-chip-s">✅ 全员</span>
       </div>
       <div class="tb-right">
@@ -1968,84 +1968,234 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
   </nav>
   <div class="content-wrap">
 
-    <div class="hero" style="background:linear-gradient(135deg,#d97706,#b45309)">
-      <div class="hero-icon">🎉</div>
+    <div class="hero" style="background:linear-gradient(135deg,#059669,#047857)">
+      <div class="hero-icon">🏆</div>
       <div class="hero-body">
-        <div class="hero-title">Day 4 · 团建方案</div>
+        <div class="hero-title">小组分享 · 互评打分</div>
         <div class="hero-metas">
-          <span class="hero-meta">📍 昆明湖景酒店及周边</span>
-          <span class="hero-meta">⏰ 10:00—16:00</span>
-          <span class="hero-meta">🗓️ 7月5日（周日）</span>
-          <span class="hero-meta">👥 全员12人</span>
+          <span class="hero-meta">👥 4个小组</span>
+          <span class="hero-meta">🔄 2轮分享</span>
+          <span class="hero-meta">⭐ 发言+提问均可得分</span>
         </div>
       </div>
     </div>
 
-    <div class="section-h">团建方案选择</div>
-    <p class="section-sub">以下三个方案，方案A为推荐首选</p>
+    <!-- 规则说明 -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-h">📋 打分规则</div>
+      <ul class="ck">
+        <li>共 <strong>4个小组</strong>，每组轮流上台分享</li>
+        <li>每组分享完毕后，<strong>其他3组</strong>各自打分（1—10分）</li>
+        <li>共进行 <strong>2轮</strong>分享，每组有2次展示机会</li>
+        <li>分享期间<strong>提问加分</strong>：每次提问该组额外获得 +1 分</li>
+        <li>所有轮次结束后，点击「<strong>查看结果</strong>」展示各组总分排名</li>
+      </ul>
+    </div>
 
-    <div class="tb-grid" style="margin-bottom:28px">
-      <div class="tb-card" data-p="A">
-        <div class="tb-head">🚴<span class="tb-rec">⭐ 推荐</span></div>
-        <div class="tb-body">
-          <div class="tb-title">方案A：昆明骑行 + 竹林徒步</div>
-          <div class="tb-desc">昆明湖景酒店自带骑行路线与自行车租赁，2h骑行穿越茶园竹林；骑行后1h竹林徒步，终点设茶歇站。体力门槛低，风景极佳，适合全员参与。</div>
-          <div class="tb-tags"><span class="tag t-blue">🚴 骑行2h</span><span class="tag t-green">🏕️ 徒步1h</span><span class="tag t-orange">☕ 茶歇</span><span class="tag t-gray">体力门槛低</span></div>
+    <!-- 当前状态 -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-h" id="vote-status-title">🎤 第1轮 · 分享打分</div>
+      <div style="font-size:13px;color:var(--g500);margin-bottom:14px" id="vote-hint">选择正在分享的小组，其他组为其打分</div>
+
+      <!-- 当前分享组选择 -->
+      <div style="margin-bottom:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--g600);margin-bottom:8px">🎤 当前分享组：</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap" id="presenting-btns">
+          <button class="vote-present-btn" data-g="1" onclick="setPresenting(1)">第1组</button>
+          <button class="vote-present-btn" data-g="2" onclick="setPresenting(2)">第2组</button>
+          <button class="vote-present-btn" data-g="3" onclick="setPresenting(3)">第3组</button>
+          <button class="vote-present-btn" data-g="4" onclick="setPresenting(4)">第4组</button>
         </div>
       </div>
-      <div class="tb-card" data-p="B">
-        <div class="tb-head">🎋</div>
-        <div class="tb-body">
-          <div class="tb-title">方案B：安吉竹博园 + 天荒坪</div>
-          <div class="tb-desc">安吉竹博园1h参观；再前往天荒坪水库景区，壮阔山水景观。适合喜欢文化游览的团队，车程约40min。</div>
-          <div class="tb-tags"><span class="tag t-green">🎋 竹博园1h</span><span class="tag t-blue">🏔️ 天荒坪</span><span class="tag t-gray">车程40min</span></div>
-        </div>
-      </div>
-      <div class="tb-card" data-p="C">
-        <div class="tb-head">🥾</div>
-        <div class="tb-body">
-          <div class="tb-title">方案C：昆明古道徒步 + 庾村探访</div>
-          <div class="tb-desc">昆明古道2-3h轻徒步，沿途竹海翠绿、溪流潺潺；后前往庾村探访民国风情建筑群，感受历史人文氛围。</div>
-          <div class="tb-tags"><span class="tag t-orange">🥾 古道徒步2-3h</span><span class="tag t-purple">🏛️ 庾村人文</span></div>
+
+      <!-- 打分区 -->
+      <div id="score-area" style="display:none">
+        <div style="font-size:12px;font-weight:700;color:var(--g600);margin-bottom:10px">⭐ 为「<span id="presenting-label"></span>」打分（其他组）：</div>
+        <div id="scorer-cards" style="display:flex;flex-direction:column;gap:10px"></div>
+        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+          <button onclick="addQuestion()" style="flex:1;padding:10px;background:#eff6ff;color:#1d4ed8;border:1.5px solid #bfdbfe;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer">💬 提问加分 +1</button>
+          <button onclick="submitRound()" style="flex:2;padding:10px;background:linear-gradient(135deg,#059669,#047857);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer">✅ 确认本次得分</button>
         </div>
       </div>
     </div>
 
-    <div class="section-h">📍 住宿推荐</div>
-    <p class="section-sub">建议优先选择昆明湖景酒店，一站式能力最匹配</p>
-    <div class="card" style="margin-bottom:28px">
-      <table class="tbl">
-        <thead><tr><th>酒店</th><th>特色</th><th>参考价格</th></tr></thead>
-        <tbody>
-          <tr><td><strong>昆明湖景酒店（推荐）</strong></td><td>昆明最知名度假酒店，会议室+别墅+泳池+骑行+徒步一站式，121间别墅</td><td>约800-1200元/间/晚</td></tr>
-        </tbody>
-      </table>
+    <!-- 实时积分板 -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-h">📊 实时积分</div>
+      <div id="scoreboard" style="display:grid;grid-template-columns:1fr 1fr;gap:10px"></div>
     </div>
 
-    <div class="section-h">🍽️ 4天餐饮安排</div>
-    <p class="section-sub">核心原则：吃得好大家才开心，4天不重复，每餐有特色</p>
-    <div class="meal-grid" style="margin-bottom:28px">
-      <div class="meal-card"><div class="meal-title">🌿 Day1午餐</div><div class="meal-desc">昆明土菜：土鸡煲、笋干烧肉、山野菜<br><strong>推荐：</strong>清研莫干（庾村，人均80）</div></div>
-      <div class="meal-card"><div class="meal-title">🔥 Day1晚餐（破冰）</div><div class="meal-desc">竹林宴/户外烧烤：烤全羊/烤乳猪+啤酒<br><strong>推荐：</strong>昆明湖景酒店户外烧烤区</div></div>
-      <div class="meal-card"><div class="meal-title">🦆 Day2午餐（全员汇合）</div><div class="meal-desc">湖州风味：太湖三白、千张包、湖州酱鸭<br><strong>推荐：</strong>东大方传统菜（含包厢）</div></div>
-      <div class="meal-card"><div class="meal-title">🍲 Day2晚餐</div><div class="meal-desc">昆明农家宴：老鸭煲、山笋红烧肉<br><strong>推荐：</strong>金鱼妈妈山野食趣</div></div>
-      <div class="meal-card"><div class="meal-title">🎋 Day3午餐</div><div class="meal-desc">安吉山珍：竹笋宴、白茶配餐<br><strong>推荐：</strong>阿露佳·舌尖上的安吉菜</div></div>
-      <div class="meal-card"><div class="meal-title">🎊 Day3晚餐（庆功宴）</div><div class="meal-desc">东海黄鱼、时令海鲜、本地特色<br><strong>推荐：</strong>裸心堡·裸心味</div></div>
-      <div class="meal-card"><div class="meal-title">👑 Day4午餐（压轴）</div><div class="meal-desc">昆明特色大全，最丰盛的一餐<br><strong>推荐：</strong>义远农场 / 西竹云见（人均150-200）</div></div>
-      <div class="meal-card"><div class="meal-title">☕ 每日茶歇</div><div class="meal-desc">昆明本地水果+安吉白茶/咖啡+手作糕点<br><strong>推荐：</strong>昆明湖景酒店酒店茶歇服务</div></div>
-    </div>
-
-    <div class="card">
-      <div class="card-h">🚄 交通安排</div>
-      <div class="ptl">
-        <div class="ptl-item"><div class="ptl-dot ptl-todo"></div><div class="ptl-date">7月1日</div><div class="ptl-task">主管团队乘飞机 ✈️ 北京出发 → 昆明，抵达后组团打车至昆明湖景酒店</div></div>
-        <div class="ptl-item"><div class="ptl-dot ptl-todo"></div><div class="ptl-date">7月3日上午</div><div class="ptl-task">骨干6人乘飞机 ✈️ 北京出发 → 昆明，组团打车至昆明湖景酒店，办理入住</div></div>
-        <div class="ptl-item"><div class="ptl-dot ptl-todo"></div><div class="ptl-date">7月5日</div><div class="ptl-task">✈️ 昆明→北京航班返京</div></div>
+    <!-- 结果区（隐藏直到投票结束） -->
+    <div id="result-area" style="display:none">
+      <div class="card">
+        <div class="card-h">🎉 最终结果</div>
+        <div id="final-result"></div>
       </div>
+    </div>
+
+    <!-- 控制按钮 -->
+    <div style="display:flex;gap:10px;margin-bottom:32px;flex-wrap:wrap">
+      <button onclick="switchRound()" id="btn-round" style="flex:1;padding:14px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer">→ 进入第2轮</button>
+      <button onclick="showResult()" style="flex:1;padding:14px;background:linear-gradient(135deg,#d97706,#b45309);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer">🏆 查看结果</button>
+      <button onclick="resetVote()" style="padding:14px 18px;background:var(--g100);color:var(--g600);border:none;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer">🔄 重置</button>
     </div>
 
   </div>
 </div>
+
+<style>
+.vote-present-btn{
+  padding:8px 18px;border:2px solid var(--g200);border-radius:20px;
+  background:#fff;font-size:13px;font-weight:700;cursor:pointer;
+  color:var(--g600);transition:all .2s
+}
+.vote-present-btn.active{
+  background:linear-gradient(135deg,#059669,#047857);
+  color:#fff;border-color:transparent
+}
+.score-row{
+  display:flex;align-items:center;gap:10px;
+  background:var(--g50);border-radius:10px;padding:10px 12px
+}
+.score-row label{font-size:13px;font-weight:700;color:var(--g700);min-width:50px}
+.score-row input[type=range]{flex:1;accent-color:#059669}
+.score-row .score-val{font-size:14px;font-weight:800;color:#059669;min-width:28px;text-align:right}
+.sb-card{
+  background:var(--g50);border-radius:12px;padding:14px;text-align:center;
+  border:2px solid var(--g100)
+}
+.sb-card.leader{
+  background:linear-gradient(135deg,#fef3c7,#fde68a);
+  border-color:#f59e0b
+}
+.sb-group{font-size:12px;font-weight:700;color:var(--g500);margin-bottom:4px}
+.sb-score{font-size:28px;font-weight:900;color:#059669}
+.sb-card.leader .sb-score{color:#d97706}
+.result-item{
+  display:flex;align-items:center;gap:14px;padding:14px;
+  border-radius:12px;margin-bottom:10px;
+}
+.result-rank{font-size:24px;min-width:36px;text-align:center}
+.result-name{font-size:15px;font-weight:800;color:var(--g800)}
+.result-pts{font-size:20px;font-weight:900;color:#059669;margin-left:auto}
+</style>
+
+<script>
+(function(){
+  var groups = ['第1组','第2组','第3组','第4组'];
+  var round = 1;
+  var presenting = 0;
+  // scores[round][presenting][scorer] = value
+  var scores = {1:{}, 2:{}};
+  // questions bonus per presenting group per round
+  var questions = {1:{1:0,2:0,3:0,4:0}, 2:{1:0,2:0,3:0,4:0}};
+
+  function renderScoreboard(){
+    var sb = document.getElementById('scoreboard');
+    var totals = getTotals();
+    var maxScore = Math.max.apply(null, [1,2,3,4].map(function(g){return totals[g]||0}));
+    sb.innerHTML = [1,2,3,4].map(function(g){
+      var isLeader = (totals[g]||0) === maxScore && maxScore > 0;
+      return '<div class="sb-card'+(isLeader?' leader':'')+'"><div class="sb-group">'+groups[g-1]+(isLeader?' 👑':'')+'</div><div class="sb-score">'+(totals[g]||0)+'</div><div style="font-size:11px;color:var(--g400);margin-top:2px">总分</div></div>';
+    }).join('');
+  }
+
+  function getTotals(){
+    var totals = {1:0,2:0,3:0,4:0};
+    [1,2].forEach(function(r){
+      [1,2,3,4].forEach(function(p){
+        if(scores[r][p]){
+          Object.values(scores[r][p]).forEach(function(v){totals[p]+=v});
+        }
+        totals[p] += (questions[r][p]||0);
+      });
+    });
+    return totals;
+  }
+
+  window.setPresenting = function(g){
+    presenting = g;
+    document.querySelectorAll('.vote-present-btn').forEach(function(b){
+      b.classList.toggle('active', parseInt(b.dataset.g)===g);
+    });
+    document.getElementById('presenting-label').textContent = groups[g-1];
+    document.getElementById('score-area').style.display = 'block';
+    // build scorer cards for other groups
+    var area = document.getElementById('scorer-cards');
+    area.innerHTML = [1,2,3,4].filter(function(x){return x!==g}).map(function(scorer){
+      var cur = (scores[round][g]&&scores[round][g][scorer]) || 5;
+      return '<div class="score-row"><label>'+groups[scorer-1]+'</label><input type="range" min="1" max="10" value="'+cur+'" oninput="this.nextElementSibling.textContent=this.value" data-scorer="'+scorer+'"><span class="score-val">'+cur+'</span></div>';
+    }).join('');
+  };
+
+  window.addQuestion = function(){
+    if(!presenting){alert('请先选择当前分享组');return;}
+    questions[round][presenting] = (questions[round][presenting]||0)+1;
+    renderScoreboard();
+    var btn = event.target;
+    var orig = btn.textContent;
+    btn.textContent = '✅ 已加分！（+'+(questions[round][presenting])+'）';
+    setTimeout(function(){btn.textContent = orig},1200);
+  };
+
+  window.submitRound = function(){
+    if(!presenting){alert('请先选择当前分享组');return;}
+    if(!scores[round][presenting]) scores[round][presenting]={};
+    document.querySelectorAll('#scorer-cards input[type=range]').forEach(function(inp){
+      scores[round][presenting][inp.dataset.scorer] = parseInt(inp.value);
+    });
+    renderScoreboard();
+    // reset
+    document.querySelectorAll('.vote-present-btn').forEach(function(b){b.classList.remove('active')});
+    document.getElementById('score-area').style.display='none';
+    presenting=0;
+    alert('✅ 得分已记录！');
+  };
+
+  window.switchRound = function(){
+    if(round===2){alert('已经是第2轮了');return;}
+    round=2;
+    document.getElementById('vote-status-title').textContent='🎤 第2轮 · 分享打分';
+    document.getElementById('btn-round').style.display='none';
+    presenting=0;
+    document.querySelectorAll('.vote-present-btn').forEach(function(b){b.classList.remove('active')});
+    document.getElementById('score-area').style.display='none';
+    alert('✅ 进入第2轮！');
+  };
+
+  window.showResult = function(){
+    var totals = getTotals();
+    var sorted = [1,2,3,4].sort(function(a,b){return totals[b]-totals[a]});
+    var medals = ['🥇','🥈','🥉','4️⃣'];
+    var html = sorted.map(function(g,i){
+      var bg = i===0?'background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #f59e0b':
+               i===1?'background:#f1f5f9;border:2px solid #cbd5e1':
+               i===2?'background:#fff7ed;border:2px solid #fed7aa':'background:var(--g50)';
+      return '<div class="result-item" style="'+bg+'"><span class="result-rank">'+medals[i]+'</span><span class="result-name">'+groups[g-1]+'</span><span class="result-pts">'+totals[g]+' 分</span></div>';
+    }).join('');
+    document.getElementById('final-result').innerHTML = html;
+    document.getElementById('result-area').style.display='block';
+    document.getElementById('result-area').scrollIntoView({behavior:'smooth'});
+  };
+
+  window.resetVote = function(){
+    if(!confirm('确定重置所有得分？'))return;
+    scores={1:{},2:{}};
+    questions={1:{1:0,2:0,3:0,4:0},2:{1:0,2:0,3:0,4:0}};
+    round=1; presenting=0;
+    document.getElementById('vote-status-title').textContent='🎤 第1轮 · 分享打分';
+    document.getElementById('btn-round').style.display='';
+    document.querySelectorAll('.vote-present-btn').forEach(function(b){b.classList.remove('active')});
+    document.getElementById('score-area').style.display='none';
+    document.getElementById('result-area').style.display='none';
+    renderScoreboard();
+  };
+
+  // init
+  renderScoreboard();
+})();
+</script>
+
 
 <!-- ════ 主管密码弹窗 ════ -->
 <div id="pwd-overlay" style="
