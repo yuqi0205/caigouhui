@@ -2030,37 +2030,79 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
       <div class="card-h">📋 打分规则</div>
       <ul class="ck">
         <li>共 <strong>4个小组</strong>，每组轮流上台分享</li>
-        <li>每组分享完毕后，<strong>其他3组</strong>各自打分（1—10分）</li>
+        <li>每组分享完毕后，<strong>其他3组</strong>各自为其打分（1—10分）</li>
+        <li>打完分后点击<strong>「确认提交」</strong>，分数锁定不可修改</li>
         <li>共进行 <strong>2轮</strong>分享，每组有2次展示机会</li>
         <li>分享期间<strong>提问加分</strong>：每次提问该组额外获得 +1 分</li>
-        <li>所有轮次结束后，点击「<strong>查看结果</strong>」展示各组总分排名</li>
+        <li>一轮4组全部提交后，<strong>主持人</strong>确认本轮得分结果</li>
       </ul>
     </div>
 
-    <!-- 当前状态 -->
+    <!-- 操作步骤引导 -->
     <div class="card" style="margin-bottom:16px">
       <div class="card-h" id="vote-status-title">🎤 第1轮 · 分享打分</div>
-      <div style="font-size:13px;color:var(--g500);margin-bottom:14px" id="vote-hint">选择正在分享的小组，其他组为其打分</div>
 
-      <!-- 当前分享组选择 -->
-      <div style="margin-bottom:16px">
-        <div style="font-size:12px;font-weight:700;color:var(--g600);margin-bottom:8px">🎤 当前分享组：</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap" id="presenting-btns">
-          <button class="vote-present-btn" data-g="1" onclick="setPresenting(1)">第1组</button>
-          <button class="vote-present-btn" data-g="2" onclick="setPresenting(2)">第2组</button>
-          <button class="vote-present-btn" data-g="3" onclick="setPresenting(3)">第3组</button>
-          <button class="vote-present-btn" data-g="4" onclick="setPresenting(4)">第4组</button>
+      <!-- 步骤条 -->
+      <div class="step-bar" id="step-bar">
+        <div class="step-item" data-s="1">
+          <div class="step-num">1</div>
+          <div class="step-label">选择分享组</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item" data-s="2">
+          <div class="step-num">2</div>
+          <div class="step-label">各组打分</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item" data-s="3">
+          <div class="step-num">3</div>
+          <div class="step-label">确认提交</div>
         </div>
       </div>
 
-      <!-- 打分区 -->
-      <div id="score-area" style="display:none">
-        <div style="font-size:12px;font-weight:700;color:var(--g600);margin-bottom:10px">⭐ 为「<span id="presenting-label"></span>」打分（其他组）：</div>
-        <div id="scorer-cards" style="display:flex;flex-direction:column;gap:10px"></div>
-        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-          <button onclick="addQuestion()" style="flex:1;padding:10px;background:#eff6ff;color:#1d4ed8;border:1.5px solid #bfdbfe;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer">💬 提问加分 +1</button>
-          <button onclick="submitRound()" style="flex:2;padding:10px;background:linear-gradient(135deg,#059669,#047857);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer">✅ 确认本次得分</button>
+      <!-- 第1步：选择当前分享组 -->
+      <div id="step1-area">
+        <div style="font-size:13px;font-weight:700;color:var(--g700);margin:12px 0 8px">👇 点击选择当前正在分享的小组：</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap" id="presenting-btns">
+          <button class="vote-present-btn" data-g="1" onclick="setPresenting(1)">
+            <span class="vpb-name">第1组</span><span class="vpb-status" id="g1-status">⏳ 待评分</span>
+          </button>
+          <button class="vote-present-btn" data-g="2" onclick="setPresenting(2)">
+            <span class="vpb-name">第2组</span><span class="vpb-status" id="g2-status">⏳ 待评分</span>
+          </button>
+          <button class="vote-present-btn" data-g="3" onclick="setPresenting(3)">
+            <span class="vpb-name">第3组</span><span class="vpb-status" id="g3-status">⏳ 待评分</span>
+          </button>
+          <button class="vote-present-btn" data-g="4" onclick="setPresenting(4)">
+            <span class="vpb-name">第4组</span><span class="vpb-status" id="g4-status">⏳ 待评分</span>
+          </button>
         </div>
+      </div>
+
+      <!-- 第2步+3步：打分区 -->
+      <div id="score-area" style="display:none">
+        <div class="divider" style="margin:14px 0 10px"></div>
+        <div style="font-size:14px;font-weight:800;color:var(--g800);margin-bottom:6px">🎤 正在为「<span id="presenting-label" style="color:#059669"></span>」打分</div>
+        <div style="font-size:12px;color:var(--g500);margin-bottom:14px">请其他3组分别滑动打分（1—10），打完后点击「确认提交」</div>
+
+        <div id="scorer-cards" style="display:flex;flex-direction:column;gap:10px"></div>
+
+        <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+          <button onclick="addQuestion()" class="score-action-btn btn-question">💬 提问加分 +1</button>
+          <button onclick="submitGroup()" class="score-action-btn btn-submit">✅ 确认提交</button>
+        </div>
+
+        <div id="submit-feedback" style="display:none;margin-top:12px;padding:12px 16px;background:#ecfdf5;border:1.5px solid #a7f3d0;border-radius:10px;font-size:13px;font-weight:700;color:#059669">
+        </div>
+      </div>
+
+      <!-- 主持人汇总确认区 -->
+      <div id="host-area" style="display:none">
+        <div class="divider" style="margin:16px 0 10px"></div>
+        <div style="font-size:14px;font-weight:800;color:var(--g800);margin-bottom:6px">🎯 主持人汇总</div>
+        <div style="font-size:12px;color:var(--g500);margin-bottom:12px">所有小组已完成打分，请主持人确认本轮结果</div>
+        <div id="host-summary" style="margin-bottom:14px"></div>
+        <button onclick="confirmRound()" class="score-action-btn btn-host-confirm">🔐 主持人确认本轮结果</button>
       </div>
     </div>
 
@@ -2080,7 +2122,7 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
 
     <!-- 控制按钮 -->
     <div style="display:flex;gap:10px;margin-bottom:32px;flex-wrap:wrap">
-      <button onclick="switchRound()" id="btn-round" style="flex:1;padding:14px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer">→ 进入第2轮</button>
+      <button onclick="switchRound()" id="btn-round" style="flex:1;padding:14px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;display:none">→ 进入第2轮</button>
       <button onclick="showResult()" style="flex:1;padding:14px;background:linear-gradient(135deg,#d97706,#b45309);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer">🏆 查看结果</button>
       <button onclick="resetVote()" style="padding:14px 18px;background:var(--g100);color:var(--g600);border:none;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer">🔄 重置</button>
     </div>
@@ -2090,21 +2132,60 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
 
 <style>
 .vote-present-btn{
-  padding:8px 18px;border:2px solid var(--g200);border-radius:20px;
+  display:flex;flex-direction:column;align-items:center;
+  padding:12px 20px;border:2px solid var(--g200);border-radius:14px;
   background:#fff;font-size:13px;font-weight:700;cursor:pointer;
-  color:var(--g600);transition:all .2s
+  color:var(--g600);transition:all .25s;gap:4px;min-width:90px;
+  position:relative
 }
+.vote-present-btn .vpb-name{font-size:14px;font-weight:800}
+.vote-present-btn .vpb-status{font-size:11px;font-weight:600;color:var(--g400)}
 .vote-present-btn.active{
   background:linear-gradient(135deg,#059669,#047857);
-  color:#fff;border-color:transparent
+  color:#fff;border-color:transparent;
+  transform:scale(1.05)
+}
+.vote-present-btn.active .vpb-status{color:#d1fae5}
+.vote-present-btn.done{
+  background:#f0fdf4;border-color:#86efac;color:#166534;
+}
+.vote-present-btn.done .vpb-status{color:#22c55e}
+.vote-present-btn.done::after{
+  content:'✅';position:absolute;top:-6px;right:-6px;
+  font-size:14px;background:#fff;border-radius:50%;
+  width:22px;height:22px;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 1px 4px rgba(0,0,0,.15)
 }
 .score-row{
   display:flex;align-items:center;gap:10px;
-  background:var(--g50);border-radius:10px;padding:10px 12px
+  background:var(--g50);border-radius:10px;padding:12px 14px;
+  border:2px solid var(--g100)
 }
-.score-row label{font-size:13px;font-weight:700;color:var(--g700);min-width:50px}
+.score-row.sr-locked{
+  background:#f0fdf4;border-color:#86efac;opacity:.7
+}
+.score-row label{font-size:13px;font-weight:700;color:var(--g700);min-width:55px}
 .score-row input[type=range]{flex:1;accent-color:#059669}
-.score-row .score-val{font-size:14px;font-weight:800;color:#059669;min-width:28px;text-align:right}
+.score-row .score-val{font-size:16px;font-weight:900;color:#059669;min-width:30px;text-align:right}
+.score-row.sr-locked input[type=range]{pointer-events:none;opacity:.4}
+.score-row.sr-locked .score-val{color:#22c55e}
+.score-action-btn{
+  padding:12px 18px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;
+  transition:all .2s;border:none
+}
+.btn-question{
+  flex:1;background:#eff6ff;color:#1d4ed8;border:1.5px solid #bfdbfe
+}
+.btn-question:hover{background:#dbeafe}
+.btn-submit{
+  flex:2;background:linear-gradient(135deg,#059669,#047857);color:#fff
+}
+.btn-submit:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(5,150,105,.4)}
+.btn-host-confirm{
+  width:100%;padding:16px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;
+  font-size:15px
+}
+.btn-host-confirm:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(124,58,237,.4)}
 .sb-card{
   background:var(--g50);border-radius:12px;padding:14px;text-align:center;
   border:2px solid var(--g100)
@@ -2123,6 +2204,44 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
 .result-rank{font-size:24px;min-width:36px;text-align:center}
 .result-name{font-size:15px;font-weight:800;color:var(--g800)}
 .result-pts{font-size:20px;font-weight:900;color:#059669;margin-left:auto}
+/* 步骤条 */
+.step-bar{
+  display:flex;align-items:center;justify-content:center;
+  margin:10px 0 4px;gap:0
+}
+.step-item{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  opacity:.35;transition:all .3s
+}
+.step-item.active{opacity:1}
+.step-item.done{opacity:.6}
+.step-num{
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:800;
+  background:var(--g200);color:var(--g600)
+}
+.step-item.active .step-num{
+  background:linear-gradient(135deg,#059669,#047857);color:#fff;
+  box-shadow:0 2px 8px rgba(5,150,105,.4)
+}
+.step-item.done .step-num{
+  background:#d1fae5;color:#059669
+}
+.step-label{font-size:11px;font-weight:600;color:var(--g500)}
+.step-item.active .step-label{color:#059669;font-weight:700}
+.step-line{
+  flex:1;max-width:50px;height:2px;background:var(--g200);margin:0 6px
+}
+/* 主持人汇总卡 */
+.host-score-card{
+  display:flex;align-items:center;padding:10px 14px;
+  background:var(--g50);border-radius:10px;margin-bottom:8px;
+  border:1.5px solid var(--g100)
+}
+.hsc-group{font-size:13px;font-weight:800;color:var(--g700);min-width:55px}
+.hsc-detail{flex:1;font-size:12px;color:var(--g500)}
+.hsc-total{font-size:18px;font-weight:900;color:#059669;min-width:40px;text-align:right}
 </style>
 
 <script>
@@ -2134,6 +2253,56 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
   var scores = {1:{}, 2:{}};
   // questions bonus per presenting group per round
   var questions = {1:{1:0,2:0,3:0,4:0}, 2:{1:0,2:0,3:0,4:0}};
+  // Track which groups have submitted in current round
+  var submitted = {1:{}, 2:{}};
+  // Track round confirmed by host
+  var roundConfirmed = {1:false, 2:false};
+  var currentStep = 0; // 0=idle, 1=selected presenting, 2=scoring done (ready to submit)
+
+  function updateStepBar(step){
+    currentStep = step;
+    document.querySelectorAll('.step-item').forEach(function(el){
+      var s = parseInt(el.dataset.s);
+      el.classList.remove('active','done');
+      if(s < step) el.classList.add('done');
+      else if(s === step) el.classList.add('active');
+    });
+  }
+
+  function getGroupStatus(g){
+    // 'pending' | 'submitted' | 'confirmed'
+    if(roundConfirmed[round] || submitted[round][g]) return 'submitted';
+    return 'pending';
+  }
+
+  function updateGroupBtns(){
+    [1,2,3,4].forEach(function(g){
+      var btn = document.querySelector('.vote-present-btn[data-g="'+g+'"]');
+      var statusEl = document.getElementById('g'+g+'-status');
+      if(!btn) return;
+      btn.classList.remove('done','active');
+      if(submitted[round][g]){
+        btn.classList.add('done');
+        if(statusEl) statusEl.textContent = '✅ 已提交';
+      } else {
+        if(statusEl) statusEl.textContent = '⏳ 待评分';
+      }
+      // Disable already-submitted groups in current round
+      if(submitted[round][g]){
+        btn.style.pointerEvents = 'none';
+        btn.style.opacity = '0.6';
+      } else {
+        btn.style.pointerEvents = '';
+        btn.style.opacity = '';
+      }
+      // Active state
+      if(g === presenting) btn.classList.add('active');
+    });
+  }
+
+  function checkAllSubmitted(){
+    return [1,2,3,4].every(function(g){ return submitted[round][g]; });
+  }
 
   function renderScoreboard(){
     var sb = document.getElementById('scoreboard');
@@ -2141,6 +2310,7 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
     var maxScore = Math.max.apply(null, [1,2,3,4].map(function(g){return totals[g]||0}));
     sb.innerHTML = [1,2,3,4].map(function(g){
       var isLeader = (totals[g]||0) === maxScore && maxScore > 0;
+      var sub = submitted[1][g]||submitted[2][g] ? '' : '<div style="font-size:10px;color:var(--g400);margin-top:2px">第'+round+'轮</div>';
       return '<div class="sb-card'+(isLeader?' leader':'')+'"><div class="sb-group">'+groups[g-1]+(isLeader?' 👑':'')+'</div><div class="sb-score">'+(totals[g]||0)+'</div><div style="font-size:11px;color:var(--g400);margin-top:2px">总分</div></div>';
     }).join('');
   }
@@ -2159,42 +2329,108 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
   }
 
   window.setPresenting = function(g){
+    if(submitted[round][g]){
+      return; // already submitted
+    }
     presenting = g;
-    document.querySelectorAll('.vote-present-btn').forEach(function(b){
-      b.classList.toggle('active', parseInt(b.dataset.g)===g);
-    });
+    updateStepBar(1);
+    updateGroupBtns();
     document.getElementById('presenting-label').textContent = groups[g-1];
     document.getElementById('score-area').style.display = 'block';
+    document.getElementById('submit-feedback').style.display = 'none';
     // build scorer cards for other groups
     var area = document.getElementById('scorer-cards');
     area.innerHTML = [1,2,3,4].filter(function(x){return x!==g}).map(function(scorer){
       var cur = (scores[round][g]&&scores[round][g][scorer]) || 5;
-      return '<div class="score-row"><label>'+groups[scorer-1]+'</label><input type="range" min="1" max="10" value="'+cur+'" oninput="this.nextElementSibling.textContent=this.value" data-scorer="'+scorer+'"><span class="score-val">'+cur+'</span></div>';
+      var locked = false;
+      return '<div class="score-row'+(locked?' sr-locked':'')+'"><label>'+groups[scorer-1]+'</label><input type="range" min="1" max="10" value="'+cur+'" oninput="this.nextElementSibling.textContent=this.value" data-scorer="'+scorer+'"><span class="score-val">'+cur+'</span></div>';
     }).join('');
+    // scroll to score area
+    document.getElementById('score-area').scrollIntoView({behavior:'smooth', block:'nearest'});
   };
 
   window.addQuestion = function(){
     if(!presenting){alert('请先选择当前分享组');return;}
     questions[round][presenting] = (questions[round][presenting]||0)+1;
     renderScoreboard();
-    var btn = event.target;
-    var orig = btn.textContent;
-    btn.textContent = '✅ 已加分！（+'+(questions[round][presenting])+'）';
-    setTimeout(function(){btn.textContent = orig},1200);
+    var btn = event.target.closest('.btn-question');
+    var orig = btn.innerHTML;
+    btn.innerHTML = '✅ 已加分！（+'+questions[round][presenting]+'次提问）';
+    btn.style.background = '#d1fae5';
+    btn.style.color = '#059669';
+    setTimeout(function(){btn.innerHTML = orig; btn.style.background=''; btn.style.color='';},1500);
   };
 
-  window.submitRound = function(){
-    if(!presenting){alert('请先选择当前分享组');return;}
+  window.submitGroup = function(){
+    if(!presenting){alert('请先选择正在分享的小组');return;}
+    // Save scores
     if(!scores[round][presenting]) scores[round][presenting]={};
     document.querySelectorAll('#scorer-cards input[type=range]').forEach(function(inp){
       scores[round][presenting][inp.dataset.scorer] = parseInt(inp.value);
     });
+    // Mark as submitted
+    submitted[round][presenting] = true;
+
+    // Show feedback
+    var fb = document.getElementById('submit-feedback');
+    var otherScores = Object.values(scores[round][presenting]);
+    var sum = otherScores.reduce(function(a,b){return a+b},0) + (questions[round][presenting]||0);
+    fb.innerHTML = '✅ <strong>'+groups[presenting-1]+'</strong> 得分已锁定！本组得分：<strong style="font-size:18px">'+sum+'</strong> 分（互评 '+otherScores.join(' + ')+' + 提问 +'+(questions[round][presenting]||0)+'）';
+    fb.style.display = 'block';
+
+    // Lock the score rows visually
+    document.querySelectorAll('#scorer-cards .score-row').forEach(function(row){
+      row.classList.add('sr-locked');
+    });
+    // Lock submit button
+    var submitBtn = document.querySelector('.btn-submit');
+    submitBtn.textContent = '🔒 已锁定';
+    submitBtn.style.background = '#d1fae5';
+    submitBtn.style.color = '#059669';
+    submitBtn.style.pointerEvents = 'none';
+
+    updateStepBar(3);
     renderScoreboard();
-    // reset
-    document.querySelectorAll('.vote-present-btn').forEach(function(b){b.classList.remove('active')});
-    document.getElementById('score-area').style.display='none';
-    presenting=0;
-    alert('✅ 得分已记录！');
+    updateGroupBtns();
+
+    // Check if all groups submitted in this round
+    if(checkAllSubmitted()){
+      showHostPanel();
+    }
+  };
+
+  function showHostPanel(){
+    updateStepBar(3);
+    var ha = document.getElementById('host-area');
+    ha.style.display = 'block';
+
+    // Build summary
+    var totals = getTotals();
+    var html = [1,2,3,4].map(function(g){
+      var otherScores = scores[round][g] ? Object.values(scores[round][g]) : [];
+      var sum = otherScores.reduce(function(a,b){return a+b},0) + (questions[round][g]||0);
+      var detail = otherScores.length ? otherScores.map(function(v,i){
+        var scorer = [1,2,3,4].filter(function(x){return x!==g})[i];
+        return groups[scorer-1]+':'+v;
+      }).join(' / ') : '—';
+      if(questions[round][g]>0) detail += ' / 提问+'+questions[round][g];
+      return '<div class="host-score-card"><div class="hsc-group">'+groups[g-1]+'</div><div class="hsc-detail">'+detail+'</div><div class="hsc-total">'+sum+'</div></div>';
+    }).join('');
+    document.getElementById('host-summary').innerHTML = html;
+    ha.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  window.confirmRound = function(){
+    roundConfirmed[round] = true;
+    var ha = document.getElementById('host-area');
+    ha.innerHTML = '<div style="padding:16px;background:#f0fdf4;border:2px solid #86efac;border-radius:12px;text-align:center;font-size:14px;font-weight:700;color:#059669">✅ 第'+round+'轮结果已由主持人确认！</div>';
+
+    // Show switch round button
+    if(round === 1){
+      var btn = document.getElementById('btn-round');
+      btn.style.display = '';
+      btn.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
   };
 
   window.switchRound = function(){
@@ -2203,9 +2439,11 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
     document.getElementById('vote-status-title').textContent='🎤 第2轮 · 分享打分';
     document.getElementById('btn-round').style.display='none';
     presenting=0;
-    document.querySelectorAll('.vote-present-btn').forEach(function(b){b.classList.remove('active')});
+    updateStepBar(0);
+    updateGroupBtns();
     document.getElementById('score-area').style.display='none';
-    alert('✅ 进入第2轮！');
+    document.getElementById('host-area').style.display='none';
+    alert('✅ 进入第2轮！请依次为每组打分');
   };
 
   window.showResult = function(){
@@ -2227,16 +2465,23 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
     if(!confirm('确定重置所有得分？'))return;
     scores={1:{},2:{}};
     questions={1:{1:0,2:0,3:0,4:0},2:{1:0,2:0,3:0,4:0}};
-    round=1; presenting=0;
+    submitted={1:{},2:{}};
+    roundConfirmed={1:false,2:false};
+    round=1; presenting=0; currentStep=0;
     document.getElementById('vote-status-title').textContent='🎤 第1轮 · 分享打分';
-    document.getElementById('btn-round').style.display='';
-    document.querySelectorAll('.vote-present-btn').forEach(function(b){b.classList.remove('active')});
+    document.getElementById('btn-round').style.display='none';
+    updateStepBar(0);
+    updateGroupBtns();
     document.getElementById('score-area').style.display='none';
+    document.getElementById('host-area').style.display='none';
     document.getElementById('result-area').style.display='none';
+    document.getElementById('submit-feedback').style.display='none';
     renderScoreboard();
   };
 
   // init
+  updateStepBar(0);
+  updateGroupBtns();
   renderScoreboard();
 })();
 </script>
