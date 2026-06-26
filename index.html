@@ -2083,16 +2083,17 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
       <div id="score-area" style="display:none">
         <div class="divider" style="margin:14px 0 10px"></div>
         <div style="font-size:14px;font-weight:800;color:var(--g800);margin-bottom:6px">🎤 正在为「<span id="presenting-label" style="color:#059669"></span>」打分</div>
-        <div style="font-size:12px;color:var(--g500);margin-bottom:14px">请其他3组分别滑动打分（1—10），打完后点击「确认提交」</div>
+        <div style="font-size:12px;color:var(--g500);margin-bottom:14px">请各组滑动打分（1—10），打完后各自点击「确认提交」</div>
 
-        <div id="scorer-cards" style="display:flex;flex-direction:column;gap:10px"></div>
+        <div id="scorer-cards" style="display:flex;flex-direction:column;gap:12px"></div>
 
-        <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+        <div style="margin-top:14px">
           <button onclick="addQuestion()" class="score-action-btn btn-question">💬 提问加分 +1</button>
-          <button onclick="submitGroup()" class="score-action-btn btn-submit">✅ 确认提交</button>
         </div>
 
-        <div id="submit-feedback" style="display:none;margin-top:12px;padding:12px 16px;background:#ecfdf5;border:1.5px solid #a7f3d0;border-radius:10px;font-size:13px;font-weight:700;color:#059669">
+        <!-- 本组全部提交完毕提示 -->
+        <div id="all-scorers-done" style="display:none;margin-top:14px;padding:14px 18px;background:#ecfdf5;border:2px solid #86efac;border-radius:12px;font-size:14px;font-weight:700;color:#059669;text-align:center">
+          ✅ 所有打分组均已提交！可继续选择下一组分享
         </div>
       </div>
 
@@ -2158,17 +2159,33 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
 }
 .score-row{
   display:flex;align-items:center;gap:10px;
-  background:var(--g50);border-radius:10px;padding:12px 14px;
-  border:2px solid var(--g100)
+  background:var(--g50);border-radius:12px;padding:14px 14px;
+  border:2px solid var(--g100);
+  flex-wrap:wrap
 }
 .score-row.sr-locked{
-  background:#f0fdf4;border-color:#86efac;opacity:.7
+  background:#f0fdf4;border-color:#86efac;
 }
 .score-row label{font-size:13px;font-weight:700;color:var(--g700);min-width:55px}
-.score-row input[type=range]{flex:1;accent-color:#059669}
-.score-row .score-val{font-size:16px;font-weight:900;color:#059669;min-width:30px;text-align:right}
-.score-row.sr-locked input[type=range]{pointer-events:none;opacity:.4}
-.score-row.sr-locked .score-val{color:#22c55e}
+.score-row input[type=range]{flex:1;accent-color:#059669;min-width:80px}
+.score-row .score-val{font-size:18px;font-weight:900;color:#059669;min-width:30px;text-align:right}
+.score-row .sr-confirm{
+  padding:8px 14px;border:none;border-radius:8px;
+  background:linear-gradient(135deg,#059669,#047857);color:#fff;
+  font-size:12px;font-weight:700;cursor:pointer;
+  transition:all .2s;white-space:nowrap
+}
+.score-row .sr-confirm:hover{box-shadow:0 2px 8px rgba(5,150,105,.4)}
+.score-row .sr-confirm.sr-done{
+  background:#d1fae5;color:#059669;cursor:default;pointer-events:none
+}
+.score-row.sr-locked input[type=range]{pointer-events:none;opacity:.35}
+.score-row.sr-locked .score-val{color:#16a34a}
+.score-row .sr-badge{
+  display:none;font-size:12px;font-weight:700;color:#059669;
+  padding:4px 10px;background:#d1fae5;border-radius:6px
+}
+.score-row.sr-locked .sr-badge{display:inline-block}
 .score-action-btn{
   padding:12px 18px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;
   transition:all .2s;border:none
@@ -2337,13 +2354,20 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
     updateGroupBtns();
     document.getElementById('presenting-label').textContent = groups[g-1];
     document.getElementById('score-area').style.display = 'block';
-    document.getElementById('submit-feedback').style.display = 'none';
-    // build scorer cards for other groups
+    document.getElementById('all-scorers-done').style.display = 'none';
+    // build scorer cards — each with its own confirm button
     var area = document.getElementById('scorer-cards');
     area.innerHTML = [1,2,3,4].filter(function(x){return x!==g}).map(function(scorer){
       var cur = (scores[round][g]&&scores[round][g][scorer]) || 5;
-      var locked = false;
-      return '<div class="score-row'+(locked?' sr-locked':'')+'"><label>'+groups[scorer-1]+'</label><input type="range" min="1" max="10" value="'+cur+'" oninput="this.nextElementSibling.textContent=this.value" data-scorer="'+scorer+'"><span class="score-val">'+cur+'</span></div>';
+      var isLocked = !!(scores[round][g]&&scores[round][g][scorer]&&submitted[round][g]);
+      return '<div class="score-row'+(isLocked?' sr-locked':'')+'" id="sr-'+scorer+'" data-scorer="'+scorer+'">'
+        +'<label>'+groups[scorer-1]+'</label>'
+        +'<input type="range" min="1" max="10" value="'+cur+'" oninput="this.nextElementSibling.textContent=this.value" data-scorer="'+scorer+'">'
+        +'<span class="score-val">'+cur+'</span>'
+        +(isLocked
+          ? '<span class="sr-badge">✅ 已提交</span>'
+          : '<button class="sr-confirm" onclick="submitScorer('+scorer+')">✅ 确认提交</button>')
+        +'</div>';
     }).join('');
     // scroll to score area
     document.getElementById('score-area').scrollIntoView({behavior:'smooth', block:'nearest'});
@@ -2361,41 +2385,46 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
     setTimeout(function(){btn.innerHTML = orig; btn.style.background=''; btn.style.color='';},1500);
   };
 
-  window.submitGroup = function(){
-    if(!presenting){alert('请先选择正在分享的小组');return;}
-    // Save scores
+  window.submitScorer = function(scorer){
+    if(!presenting){return;}
+    // Save this scorer's score
     if(!scores[round][presenting]) scores[round][presenting]={};
-    document.querySelectorAll('#scorer-cards input[type=range]').forEach(function(inp){
-      scores[round][presenting][inp.dataset.scorer] = parseInt(inp.value);
-    });
-    // Mark as submitted
-    submitted[round][presenting] = true;
+    var inp = document.querySelector('#sr-'+scorer+' input[type=range]');
+    if(inp){
+      scores[round][presenting][scorer] = parseInt(inp.value);
+    }
 
-    // Show feedback
-    var fb = document.getElementById('submit-feedback');
-    var otherScores = Object.values(scores[round][presenting]);
-    var sum = otherScores.reduce(function(a,b){return a+b},0) + (questions[round][presenting]||0);
-    fb.innerHTML = '✅ <strong>'+groups[presenting-1]+'</strong> 得分已锁定！本组得分：<strong style="font-size:18px">'+sum+'</strong> 分（互评 '+otherScores.join(' + ')+' + 提问 +'+(questions[round][presenting]||0)+'）';
-    fb.style.display = 'block';
+    // Lock this scorer's row visually
+    var row = document.getElementById('sr-'+scorer);
+    row.classList.add('sr-locked');
+    // Replace button with badge
+    var btn = row.querySelector('.sr-confirm');
+    if(btn){
+      var badge = document.createElement('span');
+      badge.className = 'sr-badge';
+      badge.textContent = '✅ 已提交';
+      btn.parentNode.replaceChild(badge, btn);
+    }
 
-    // Lock the score rows visually
-    document.querySelectorAll('#scorer-cards .score-row').forEach(function(row){
-      row.classList.add('sr-locked');
-    });
-    // Lock submit button
-    var submitBtn = document.querySelector('.btn-submit');
-    submitBtn.textContent = '🔒 已锁定';
-    submitBtn.style.background = '#d1fae5';
-    submitBtn.style.color = '#059669';
-    submitBtn.style.pointerEvents = 'none';
-
-    updateStepBar(3);
     renderScoreboard();
-    updateGroupBtns();
 
-    // Check if all groups submitted in this round
-    if(checkAllSubmitted()){
-      showHostPanel();
+    // Check if ALL scorers for this presenting group are locked
+    var allScorers = [1,2,3,4].filter(function(x){return x!==presenting;});
+    var allDone = allScorers.every(function(s){
+      var r = document.getElementById('sr-'+s);
+      return r && r.classList.contains('sr-locked');
+    });
+    if(allDone){
+      // Mark the presenting group as submitted
+      submitted[round][presenting] = true;
+      updateGroupBtns();
+      document.getElementById('all-scorers-done').style.display = 'block';
+      updateStepBar(3);
+
+      // Check if all 4 groups submitted
+      if(checkAllSubmitted()){
+        showHostPanel();
+      }
     }
   };
 
