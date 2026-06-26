@@ -2176,16 +2176,20 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
   transition:all .2s;white-space:nowrap
 }
 .score-row .sr-confirm:hover{box-shadow:0 2px 8px rgba(5,150,105,.4)}
-.score-row .sr-confirm.sr-done{
-  background:#d1fae5;color:#059669;cursor:default;pointer-events:none
+.score-row .sr-edit{
+  padding:8px 14px;border:1.5px solid #bfdbfe;border-radius:8px;
+  background:#eff6ff;color:#1d4ed8;
+  font-size:12px;font-weight:700;cursor:pointer;
+  transition:all .2s;white-space:nowrap
 }
-.score-row.sr-locked input[type=range]{pointer-events:none;opacity:.35}
+.score-row .sr-edit:hover{background:#dbeafe}
+.score-row.sr-locked input[type=range]{pointer-events:none;opacity:.5}
 .score-row.sr-locked .score-val{color:#16a34a}
 .score-row .sr-badge{
   display:none;font-size:12px;font-weight:700;color:#059669;
   padding:4px 10px;background:#d1fae5;border-radius:6px
 }
-.score-row.sr-locked .sr-badge{display:inline-block}
+.score-row.sr-submitted .sr-badge{display:inline-block}
 .score-action-btn{
   padding:12px 18px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;
   transition:all .2s;border:none
@@ -2272,6 +2276,8 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
   var questions = {1:{1:0,2:0,3:0,4:0}, 2:{1:0,2:0,3:0,4:0}};
   // Track which groups have submitted in current round
   var submitted = {1:{}, 2:{}};
+  // Track individual scorer submissions: submittedScorers[round][presenting-scorer] = true
+  var submittedScorers = {1:{}, 2:{}};
   // Track round confirmed by host
   var roundConfirmed = {1:false, 2:false};
   var currentStep = 0; // 0=idle, 1=selected presenting, 2=scoring done (ready to submit)
@@ -2359,13 +2365,13 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
     var area = document.getElementById('scorer-cards');
     area.innerHTML = [1,2,3,4].filter(function(x){return x!==g}).map(function(scorer){
       var cur = (scores[round][g]&&scores[round][g][scorer]) || 5;
-      var isLocked = !!(scores[round][g]&&scores[round][g][scorer]&&submitted[round][g]);
-      return '<div class="score-row'+(isLocked?' sr-locked':'')+'" id="sr-'+scorer+'" data-scorer="'+scorer+'">'
+      var isSubmitted = !!(scores[round][g]&&scores[round][g][scorer]!==undefined && submittedScorers[round]&&submittedScorers[round][g+'-'+scorer]);
+      return '<div class="score-row'+(isSubmitted?' sr-submitted':'')+'" id="sr-'+scorer+'" data-scorer="'+scorer+'">'
         +'<label>'+groups[scorer-1]+'</label>'
-        +'<input type="range" min="1" max="10" value="'+cur+'" oninput="this.nextElementSibling.textContent=this.value" data-scorer="'+scorer+'">'
+        +'<input type="range" min="1" max="10" value="'+cur+'" oninput="this.nextElementSibling.textContent=this.value" data-scorer="'+scorer+'"'+(isSubmitted?' disabled':'')+'>'
         +'<span class="score-val">'+cur+'</span>'
-        +(isLocked
-          ? '<span class="sr-badge">✅ 已提交</span>'
+        +(isSubmitted
+          ? '<span class="sr-badge">✅ 已提交</span><button class="sr-edit" onclick="editScorer('+scorer+')">✏️ 修改</button>'
           : '<button class="sr-confirm" onclick="submitScorer('+scorer+')">✅ 确认提交</button>')
         +'</div>';
     }).join('');
@@ -2394,36 +2400,69 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
       scores[round][presenting][scorer] = parseInt(inp.value);
     }
 
-    // Lock this scorer's row visually
+    // Mark this scorer as submitted
+    if(!submittedScorers[round]) submittedScorers[round]={};
+    submittedScorers[round][presenting+'-'+scorer] = true;
+
+    // Lock visually: disable slider, show badge + edit button
     var row = document.getElementById('sr-'+scorer);
-    row.classList.add('sr-locked');
-    // Replace button with badge
+    row.classList.add('sr-submitted');
+    var slider = row.querySelector('input[type=range]');
+    if(slider) slider.disabled = true;
+    // Replace confirm button with badge + edit button
     var btn = row.querySelector('.sr-confirm');
     if(btn){
-      var badge = document.createElement('span');
-      badge.className = 'sr-badge';
-      badge.textContent = '✅ 已提交';
-      btn.parentNode.replaceChild(badge, btn);
+      btn.insertAdjacentHTML('afterend','<span class="sr-badge">✅ 已提交</span><button class="sr-edit" onclick="editScorer('+scorer+')">✏️ 修改</button>');
+      btn.remove();
     }
 
     renderScoreboard();
 
-    // Check if ALL scorers for this presenting group are locked
+    // Check if ALL scorers for this presenting group are submitted
     var allScorers = [1,2,3,4].filter(function(x){return x!==presenting;});
     var allDone = allScorers.every(function(s){
-      var r = document.getElementById('sr-'+s);
-      return r && r.classList.contains('sr-locked');
+      return submittedScorers[round] && submittedScorers[round][presenting+'-'+s];
     });
     if(allDone){
-      // Mark the presenting group as submitted
       submitted[round][presenting] = true;
       updateGroupBtns();
       document.getElementById('all-scorers-done').style.display = 'block';
       updateStepBar(3);
-
-      // Check if all 4 groups submitted
       if(checkAllSubmitted()){
         showHostPanel();
+      }
+    }
+  };
+
+  window.editScorer = function(scorer){
+    if(!presenting){return;}
+    // Re-enable the slider
+    var row = document.getElementById('sr-'+scorer);
+    row.classList.remove('sr-submitted');
+    var slider = row.querySelector('input[type=range]');
+    if(slider) slider.disabled = false;
+
+    // Remove badge + edit button, add confirm button back
+    var badge = row.querySelector('.sr-badge');
+    var editBtn = row.querySelector('.sr-edit');
+    if(badge) badge.remove();
+    if(editBtn) editBtn.remove();
+    var newBtn = document.createElement('button');
+    newBtn.className = 'sr-confirm';
+    newBtn.textContent = '✅ 确认提交';
+    newBtn.onclick = function(){ submitScorer(scorer); };
+    row.appendChild(newBtn);
+
+    // Un-mark this scorer as submitted
+    if(submittedScorers[round]) delete submittedScorers[round][presenting+'-'+scorer];
+    // If the presenting group was marked done, un-mark it
+    if(submitted[round][presenting]){
+      delete submitted[round][presenting];
+      updateGroupBtns();
+      document.getElementById('all-scorers-done').style.display = 'none';
+      // Hide host panel if it was showing
+      if(!checkAllSubmitted()){
+        document.getElementById('host-area').style.display = 'none';
       }
     }
   };
@@ -2495,6 +2534,7 @@ ul.ck li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;
     scores={1:{},2:{}};
     questions={1:{1:0,2:0,3:0,4:0},2:{1:0,2:0,3:0,4:0}};
     submitted={1:{},2:{}};
+    submittedScorers={1:{},2:{}};
     roundConfirmed={1:false,2:false};
     round=1; presenting=0; currentStep=0;
     document.getElementById('vote-status-title').textContent='🎤 第1轮 · 分享打分';
